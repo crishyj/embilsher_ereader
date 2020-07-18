@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en">
+  <head>
+    <meta content="urn:uuid:0aa2b92e64bf74546d9828b40e52142d3c2" name="dtb:uid"/>
+  </head>
+  <docTitle>
+    <text>Welcome to English Majors Reviewers and Editors Publishing</text>
+  </docTitle>
+  <navMap>
+    <!--<navPoint id="cover" playOrder="1">
+      <navLabel>
+        <text>Cover</text>
+      </navLabel>
+      <content src="text/00-cover.xhtml"/>
+    </navPoint>-->
+    <navPoint id="welcome" playOrder="1">
+      <navLabel>
+        <text>Welcome</text>
+      </navLabel>
+      <content src="text/01-welcome.xhtml"/>
+    </navPoint>
+    <navPoint id="messagefromtheowner" playOrder="2">
+      <navLabel>
+        <text>Message from the owner</text>
+      </navLabel>
+      <content src="text/02-messagefromtheowner.xhtml"/>
+    </navPoint>
+    <navPoint id="beautifulandlimitless" playOrder="3">
+      <navLabel>
+        <text>Beautiful and Limitless</text>
+      </navLabel>
+      <content src="text/03-beautifulandlimitless.xhtml"/>
+      <navPoint id="ariportfolio" playOrder="4">
+        <navLabel>
+          <text>Ari Bernabei Portfolio</text>
+        </navLabel>
+        <content src="text/03-00-ariportfolio.xhtml"/>
+      </navPoint>
+      <navPoint id="valiportfolio" playOrder="5">
+        <navLabel>
+          <text>Vali Lancea Portfolio</text>
+        </navLabel>
+        <content src="text/03-01-valiportfolio.xhtml"/>
+      </navPoint>
+    </navPoint>
+    <navPoint id="independentandboundless" playOrder="6">
+      <navLabel>
+        <text>Independent and Boundless</text>
+      </navLabel>
+      <content src="text/04-independentandboundless.xhtml"/>
+    </navPoint>
+    <navPoint id="whoweare" playOrder="7">
+      <navLabel>
+        <text>Who we are</text>
+      </navLabel>
+      <content src="text/05-whoweare.xhtml"/>
+    </navPoint>
+    <navPoint id="credits" playOrder="8">
+      <navLabel>
+        <text>Credits</text>
+      </navLabel>
+      <content src="text/06-credits.xhtml"/>
+    </navPoint>
+  </navMap>
+</ncx>

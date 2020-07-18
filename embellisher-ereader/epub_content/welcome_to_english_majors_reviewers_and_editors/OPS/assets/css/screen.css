@@ -1,0 +1,723 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 5, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+/* line 22, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1; }
+
+/* line 24, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 26, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 28, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 103, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 32, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 116, ../../../../../../../../../../../Applications/CodeKit.app/Contents/Resources/engines/compass/compass-core/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+/* line 1, ../sass/core/_base.scss */
+b, strong {
+  text-decoration: underline; }
+
+/* line 6, ../sass/core/_base.scss */
+i, em {
+  font-style: italic; }
+
+@font-face {
+  font-family: 'EstebanRegular';
+  src: url("../fonts/esteban-regular.otf"), url("../fonts/esteban-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'CarnevaleeFreakshow';
+  src: url("../fonts/carnevalee-freakshow.otf"), url("../fonts/carnevalee-freakshow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'PenshurtBold';
+  src: url("../fonts/penshurst-bold.otf"), url("../fonts/penshurst-bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'PenshurstRegular';
+  src: url("../fonts/penshurst-regular.otf"), url("../fonts/penshurst-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'PenshurstShadow';
+  src: url("../fonts/penshurst-shadow.otf"), url("../fonts/penshurst-shadow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Outstanding';
+  src: url("../fonts/outstanding.otf"), url("../fonts/outstanding.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Preciosa';
+  src: url("../fonts/preciosa.otf"), url("../fonts/preciosa.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Rosewood';
+  src: url("../fonts/rosewood.otf"), url("../fonts/rosewood.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arvo-Regular';
+  src: url("../fonts/arvo-regular.otf"), url("../fonts/arvo-regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arvo-Bold';
+  src: url("../fonts/arvo-bold.otf"), url("../fonts/arvo-bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arimo-Bold';
+  src: url("../fonts/Arimo-Bold.otf"), url("../fonts/Arimo-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arimo-BoldItalic';
+  src: url("../fonts/Arimo-BoldItalic.otf"), url("../fonts/Arimo-BoldItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arimo-Italic';
+  src: url("../fonts/Arimo-Italic.otf"), url("../fonts/Arimo-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Arimo-Regular';
+  src: url("../fonts/Arimo-Regular.otf"), url("../fonts/Arimo-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Muli-Italic';
+  src: url("../fonts/Muli-Italic.otf"), url("../fonts/Muli-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Muli-Light';
+  src: url("../fonts/Muli-Light.otf"), url("../fonts/Muli-Light.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Muli-LightItalic';
+  src: url("../fonts/Muli-LightItalic.otf"), url("../fonts/Muli-LightItalic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Muli-Regular';
+  src: url("../fonts/Muli-Regular.otf"), url("../fonts/Muli-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+/* line 1, ../sass/patterns/_audio-player.scss */
+.audio-player {
+  display: none; }
+
+/* line 1, ../sass/patterns/_inline-audio-player.scss */
+.inline-audio-player {
+  position: relative;
+  display: block;
+  height: 100%;
+  width: 100%;
+  text-align: center; }
+  /* line 8, ../sass/patterns/_inline-audio-player.scss */
+  .inline-audio-player .resume-button {
+    position: absolute;
+    y: 0;
+    overflow: hidden;
+    zoom: 1; }
+  /* line 14, ../sass/patterns/_inline-audio-player.scss */
+  .inline-audio-player .pause-button {
+    position: absolute;
+    visibility: hidden;
+    y: 0;
+    overflow: hidden;
+    zoom: 1; }
+  /* line 21, ../sass/patterns/_inline-audio-player.scss */
+  .inline-audio-player > img {
+    visibility: hidden; }
+  /* line 25, ../sass/patterns/_inline-audio-player.scss */
+  .inline-audio-player audio {
+    overflow: hidden;
+    zoom: 1;
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto; }
+
+/* line 1, ../sass/readers/_emredemo-reader.scss */
+.emredemo-reader {
+  height: 100%;
+  color: #000000; }
+  /* line 5, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader header {
+    width: 100%;
+    background-color: #363636;
+    padding: 0;
+    margin-bottom: 1em; }
+    /* line 6, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader header:before {
+      content: "";
+      display: block;
+      padding: 0;
+      margin: 0;
+      height: 3.5em;
+      width: 100%;
+      background-image: url(../images/header-background.png);
+      background-size: 40px;
+      background-position: -10px -20px; }
+    /* line 22, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader header h1 {
+      padding: 0.2em 1em;
+      color: #FFFFFF; }
+    /* line 27, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader header:after {
+      content: "";
+      display: block;
+      padding: 0;
+      margin: 0;
+      height: 1.5em;
+      width: 100%;
+      background-image: url(../images/header-background.png);
+      background-size: 40px;
+      background-position: -10px -20px; }
+  /* line 41, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader h1 {
+    padding: 1em 0.5em 0.2em;
+    font-family: "Muli-Regular", Helvetica, sans-serif;
+    font-size: 2.5em;
+    color: #f27600; }
+  /* line 47, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader h2 {
+    padding: 1em 1.2em 0.2em;
+    font-family: "Muli-Regular", Helvetica, sans-serif;
+    font-size: 1.5em;
+    margin-top: 1em;
+    color: #34a1a4; }
+  /* line 55, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader h3 {
+    padding: 0.4em 2.2em 0.2em;
+    font-family: "Muli-Italic";
+    font-size: 1.3em;
+    color: #f27600; }
+  /* line 62, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader p {
+    padding: 0.8em 1.5em;
+    font-family: "Arimo-Regular";
+    font-size: 1.2em;
+    line-height: 1.25em;
+    color: #363636; }
+    /* line 70, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader p.center-aligned {
+      text-align: center; }
+    /* line 74, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader p.author {
+      padding-left: 2em;
+      font-family: "Arimo-Italic"; }
+  /* line 80, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader ul {
+    color: #363636;
+    font-family: "Arimo-Regular";
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 1.2em; }
+    /* line 90, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader ul li {
+      background-image: url("../images/nib-li.png");
+      background-repeat: no-repeat;
+      padding-left: 25px;
+      background-position: 0px 2px;
+      line-height: 115%;
+      padding-bottom: 0.8em; }
+  /* line 101, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader a {
+    text-decoration: underline;
+    color: #34a1a4; }
+  /* line 106, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader img.header {
+    max-width: 90%;
+    margin: 1em; }
+  /* line 111, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader img.footer {
+    margin-left: 75%;
+    width: 20%;
+    margin-top: 1em;
+    margin-bottom: 1em; }
+  /* line 118, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .center-aligned {
+    text-align: center; }
+  /* line 122, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader img.center-aligned {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; }
+  /* line 129, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .three-images {
+    display: block;
+    margin: 1em auto 2em;
+    padding: 0 auto;
+    max-width: 84%;
+    -moz-box-shadow: 0 0 0.4em 0.1em #555555;
+    -webkit-box-shadow: 0 0 0.4em 0.1em #555555;
+    box-shadow: 0 0 0.4em 0.1em #555555;
+    border-style: solid;
+    border-color: #34a1a4;
+    border-width: 4px;
+    padding: 1em 0;
+    overflow: hidden;
+    zoom: 1; }
+    /* line 141, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader .three-images img {
+      vertical-align: middle;
+      padding: 0 2.4%;
+      display: inline;
+      width: 28%; }
+  /* line 150, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .portfolio-image {
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0; }
+  /* line 155, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader aside {
+    -moz-box-shadow: 0 0 0.8em 0.1em #555555;
+    -webkit-box-shadow: 0 0 0.8em 0.1em #555555;
+    box-shadow: 0 0 0.8em 0.1em #555555;
+    border-style: solid;
+    border-color: #34a1a4;
+    border-width: 4px;
+    margin: 1em 3em;
+    padding-bottom: 0.8em; }
+    /* line 164, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader aside > h2 {
+      margin-top: 0.2em;
+      text-align: center;
+      color: #34a1a4;
+      font-family: "Muli-Regular";
+      font-size: 2em; }
+    /* line 171, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader aside > p {
+      padding: 1em 2em;
+      font-family: "Muli-Light";
+      color: #34a1a4; }
+    /* line 176, ../sass/readers/_emredemo-reader.scss */
+    .emredemo-reader aside > ul {
+      padding: 0 0.5em;
+      line-height: 100%; }
+      /* line 180, ../sass/readers/_emredemo-reader.scss */
+      .emredemo-reader aside > ul li {
+        font-family: "Muli-Light";
+        color: #34a1a4;
+        background-image: url("../images/nib-li-aside.png");
+        background-repeat: no-repeat;
+        margin: 0.5em 1em 0em;
+        padding-left: 25px;
+        background-position: 0px 4px;
+        font-size: 1em;
+        line-height: 115%; }
+  /* line 195, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .team-member > h2 {
+    padding-left: 5%;
+    padding-bottom: 0; }
+  /* line 200, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .team-member > img {
+    width: 20%;
+    display: inline-block;
+    margin: 1em 5%;
+    vertical-align: top; }
+  /* line 207, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader .team-member > p {
+    padding-left: 0;
+    width: 50%;
+    display: inline-block; }
+  /* line 214, ../sass/readers/_emredemo-reader.scss */
+  .emredemo-reader footer {
+    margin-top: 2em;
+    height: 4em;
+    background-image: url(../images/footer-background.png);
+    background-size: 8em; }
+
+/* line 1, ../sass/readers/_emredemo-credits.scss */
+.emredemo-credits {
+  color: #000000; }
+  /* line 4, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits header {
+    width: 100%;
+    background-color: #363636;
+    padding: 0;
+    margin-bottom: 1em; }
+    /* line 5, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits header:before {
+      content: "";
+      display: block;
+      padding: 0;
+      margin: 0;
+      height: 3.5em;
+      width: 100%;
+      background-image: url(../images/header-background.png);
+      background-size: 40px;
+      background-position: -10px -20px; }
+    /* line 21, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits header h1 {
+      padding: 0.2em 1em;
+      color: #FFFFFF;
+      text-align: center; }
+    /* line 27, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits header:after {
+      content: "";
+      display: block;
+      padding: 0;
+      margin: 0;
+      height: 1.5em;
+      width: 100%;
+      background-image: url(../images/header-background.png);
+      background-size: 40px;
+      background-position: -10px -20px; }
+  /* line 42, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits h1 {
+    padding: 1em 0.5em 0.2em;
+    font-family: "Muli-Regular", Helvetica, sans-serif;
+    font-size: 2.5em;
+    color: #f27600; }
+  /* line 49, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits p {
+    padding: 0.8em 1.5em;
+    font-family: "Arimo-Regular";
+    font-size: 1.2em;
+    line-height: 1.25em;
+    color: #363636; }
+    /* line 57, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits p.center-aligned {
+      text-align: center; }
+    /* line 61, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits p.author {
+      padding-left: 2em;
+      font-family: "Arimo-Italic"; }
+  /* line 67, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits a {
+    text-decoration: underline;
+    color: #34a1a4; }
+  /* line 72, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits ul {
+    color: #363636;
+    font-family: "Arimo-Regular";
+    padding-left: 2em;
+    padding-right: 2em;
+    font-size: 1.2em; }
+    /* line 82, ../sass/readers/_emredemo-credits.scss */
+    .emredemo-credits ul li {
+      background-image: url("../images/nib-li.png");
+      background-repeat: no-repeat;
+      padding-left: 25px;
+      background-position: 0px 2px;
+      line-height: 115%;
+      padding-bottom: 0.8em; }
+  /* line 93, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits img.center-aligned {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; }
+  /* line 100, ../sass/readers/_emredemo-credits.scss */
+  .emredemo-credits footer {
+    margin-top: 2em;
+    height: 4em;
+    background-image: url(../images/footer-background.png);
+    background-size: 8em; }
+
+/* line 2, ../sass/readers/_emredemo-cover.scss */
+.emredemo-cover img {
+  max-width: 100%;
+  max-height: 100%;
+  margin-left: auto;
+  margin-right: auto; }
+
+/* line 1, ../sass/readers/_steamcitypirates-reader.scss */
+.steamcitypirates-reader {
+  background-image: url("../images/steamcitypirates/paper-background.png");
+  padding: 1em;
+  color: #000000; }
+  /* line 5, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader .title-info {
+    margin-top: 0.8em;
+    text-align: center; }
+    /* line 8, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .title-info h1 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 3em; }
+      /* line 11, ../sass/readers/_steamcitypirates-reader.scss */
+      .steamcitypirates-reader .title-info h1.acknowledgements {
+        font-size: 2em; }
+    /* line 15, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .title-info h2 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 1.1em;
+      margin-top: 1em; }
+  /* line 22, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader h1 {
+    margin-top: 0.4em;
+    text-align: center;
+    font-family: "PenshurtBold", Georgia, serif;
+    font-size: 3em; }
+  /* line 29, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader h2 {
+    padding: 0.4em 1em 0.2em 1em;
+    font-family: "CarnevaleeFreakshow";
+    font-size: 1.8em; }
+  /* line 35, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader h3 {
+    padding: 0.4em 0em 0.2em 1em;
+    font-family: "Arvo-Bold";
+    font-size: 1.1em; }
+  /* line 41, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader p {
+    margin: 1em;
+    font-family: "EstebanRegular";
+    font-size: 1em;
+    line-height: 1.25em;
+    text-align: justify; }
+    /* line 48, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader p.center-aligned {
+      text-align: center; }
+  /* line 53, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader .caption-image {
+    font-size: 0.95em;
+    margin: 2em;
+    font-family: "EstebanRegular"; }
+    /* line 57, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .caption-image img {
+      width: 100%; }
+    /* line 60, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .caption-image .caption-title {
+      font-family: "Arvo-Bold"; }
+  /* line 65, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader a {
+    text-decoration: none;
+    color: #6A0707; }
+  /* line 70, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader img.center-aligned, .steamcitypirates-reader .section-marker {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; }
+  /* line 77, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader .poem {
+    text-align: center;
+    padding: 0.4em 0;
+    line-height: 1.6em;
+    font-style: italic; }
+  /* line 84, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader .final-page {
+    margin-top: 0.8em;
+    text-align: center; }
+    /* line 87, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .final-page h1 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 3em; }
+    /* line 91, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .final-page h2 {
+      padding: 0.4em 0em 0.4em;
+      font-family: "Arvo-Bold";
+      font-size: 1.1em; }
+    /* line 96, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .final-page h3 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 1.1em;
+      margin-top: 0.2em; }
+    /* line 102, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .final-page .block-quote .quote {
+      font-family: "EstebanRegular";
+      font-style: italic;
+      font-size: 1.05em;
+      text-align: center; }
+    /* line 108, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader .final-page .block-quote .credit {
+      margin-top: 0em;
+      text-align: center; }
+      /* line 111, ../sass/readers/_steamcitypirates-reader.scss */
+      .steamcitypirates-reader .final-page .block-quote .credit .credit-title {
+        font-family: "Arvo-Bold"; }
+      /* line 114, ../sass/readers/_steamcitypirates-reader.scss */
+      .steamcitypirates-reader .final-page .block-quote .credit .credit-info {
+        font-family: "Arvo-Regular";
+        font-style: italic; }
+  /* line 122, ../sass/readers/_steamcitypirates-reader.scss */
+  .steamcitypirates-reader ul.other-works {
+    margin-top: 1.6em;
+    font-family: "EstebanRegular";
+    font-size: 1.3em;
+    font-style: italic;
+    text-align: center; }
+    /* line 128, ../sass/readers/_steamcitypirates-reader.scss */
+    .steamcitypirates-reader ul.other-works li {
+      padding-bottom: 1em; }
+
+/* line 1, ../sass/readers/_forevermore-reader.scss */
+.forevermore-reader {
+  background-image: url("../images/forevermore/paper-background-ink.png");
+  background-size: 100%;
+  background-repeat: no-repeat repeat;
+  padding: 1em 1.8em;
+  color: #000000; }
+  /* line 9, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader .title-info {
+    margin-top: 0.8em;
+    text-align: center; }
+    /* line 12, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .title-info h1 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 3em; }
+      /* line 15, ../sass/readers/_forevermore-reader.scss */
+      .forevermore-reader .title-info h1.acknowledgements {
+        font-size: 2em; }
+    /* line 19, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .title-info h2 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 1.1em;
+      margin-top: 1em; }
+  /* line 26, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader h1 {
+    margin-top: 0.4em;
+    text-align: center;
+    font-family: "PenshurtBold", Georgia, serif;
+    font-size: 3em; }
+  /* line 33, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader h2 {
+    padding: 0.4em 1em 0.2em 1em;
+    font-family: "CarnevaleeFreakshow";
+    font-size: 1.8em; }
+  /* line 39, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader h3 {
+    padding: 0.4em 0em 0.2em 1em;
+    font-family: "Arvo-Bold";
+    font-size: 1.1em; }
+  /* line 45, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader p {
+    margin: 0.2em 1em;
+    font-family: "EstebanRegular";
+    font-size: 1em;
+    line-height: 1.25em;
+    text-align: justify; }
+    /* line 52, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader p.center-aligned {
+      text-align: center; }
+  /* line 57, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader .caption-image {
+    font-size: 0.95em;
+    margin: 2em;
+    font-family: "EstebanRegular"; }
+    /* line 61, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .caption-image img {
+      width: 100%; }
+    /* line 64, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .caption-image .caption-title {
+      font-family: "Arvo-Bold"; }
+  /* line 69, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader a {
+    font-family: "Arvo-Bold";
+    text-decoration: none;
+    color: #000000; }
+  /* line 75, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader img.center-aligned, .forevermore-reader .section-marker {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%; }
+  /* line 82, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader .poem {
+    text-align: center;
+    padding: 0.4em 0;
+    line-height: 1.6em;
+    font-style: italic; }
+  /* line 89, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader .final-page {
+    margin-top: 0.8em;
+    text-align: center; }
+    /* line 92, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .final-page h1 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 3em; }
+    /* line 96, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .final-page h2 {
+      padding: 0.4em 0em 0.4em;
+      font-family: "Arvo-Bold";
+      font-size: 1.1em; }
+    /* line 101, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .final-page h3 {
+      font-family: "PenshurtBold", Georgia, serif;
+      font-size: 1.1em;
+      margin-top: 0.2em; }
+    /* line 107, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .final-page .block-quote .quote {
+      font-family: "EstebanRegular";
+      font-style: italic;
+      font-size: 1.05em;
+      text-align: center; }
+    /* line 113, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader .final-page .block-quote .credit {
+      margin-top: 0em;
+      text-align: center; }
+      /* line 116, ../sass/readers/_forevermore-reader.scss */
+      .forevermore-reader .final-page .block-quote .credit .credit-title {
+        font-family: "Arvo-Bold"; }
+      /* line 119, ../sass/readers/_forevermore-reader.scss */
+      .forevermore-reader .final-page .block-quote .credit .credit-info {
+        font-family: "Arvo-Regular";
+        font-style: italic; }
+  /* line 127, ../sass/readers/_forevermore-reader.scss */
+  .forevermore-reader ul.other-works {
+    margin-top: 1.6em;
+    font-family: "EstebanRegular";
+    font-size: 1.3em;
+    font-style: italic;
+    text-align: center; }
+    /* line 133, ../sass/readers/_forevermore-reader.scss */
+    .forevermore-reader ul.other-works li {
+      padding-bottom: 1em; }

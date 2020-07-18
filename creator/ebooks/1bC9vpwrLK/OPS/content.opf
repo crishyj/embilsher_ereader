@@ -1,0 +1,79 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uuid" version="3.0">
+  <metadata xmlns:opf="http://www.idpf.org/2007/opf" xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:creator>Ilona Melocheck</dc:creator>
+    <dc:title>SunShine</dc:title>
+    <dc:identifier id="uuid">123-0-1234567-0-10</dc:identifier>
+    <meta property="dcterms:modified">2020-07-17T12:00:00Z</meta>
+    <meta name="cover" content="img/sunrise.jpg"/>
+    <dc:language>en</dc:language>
+</metadata>
+  <manifest>
+
+    <!-- TOC -->
+    <item href="toc.xhtml" id="toc-xhtml" media-type="application/xhtml+xml" properties="nav"/>
+    <item href="toc.ncx" id="toc-ncf" media-type="application/x-dtbncx+xml"/>
+
+    <!-- Readers -->
+    <item href="text/0-chapter.html" id="chapter0" media-type="text/html" fallback="chapter0x"/>
+    <item href="text/0-chapter.xhtml" id="chapter0x" media-type="text/html"/>
+
+    <item href="ebooks/1bC9vpwrLK/OPS\img\sunrise.jpg" id="unit-0" media-type="image/jpg"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\author.mp4" id="unit-1" media-type="video/mp4"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\sample.mp4" id="unit-2" media-type="video/mp4"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\Storych1.mp3" id="unit-3" media-type="audio/mpeg"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\family.css" id="unit-4" media-type="text/css"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video-js.css" id="unit-5" media-type="text/css"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video-js.min.css" id="unit-6" media-type="text/css"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video-js.swf" id="unit-7" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video.dev.js" id="unit-8" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video.js" id="unit-9" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video.novtt.dev.js" id="unit-10" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\video.novtt.js" id="unit-11" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\ar.js" id="unit-12" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\bg.js" id="unit-13" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\ca.js" id="unit-14" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\cs.js" id="unit-15" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\de.js" id="unit-16" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\es.js" id="unit-17" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\fr.js" id="unit-18" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\hu.js" id="unit-19" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\it.js" id="unit-20" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\ja.js" id="unit-21" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\ko.js" id="unit-22" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\nl.js" id="unit-23" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\pt-BR.js" id="unit-24" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\ru.js" id="unit-25" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\tr.js" id="unit-26" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\uk.js" id="unit-27" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\vi.js" id="unit-28" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\zh-CN.js" id="unit-29" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\zh-TW.js" id="unit-30" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\lang\zh.js" id="unit-31" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\font\vjs.eot" id="unit-32" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\font\vjs.svg" id="unit-33" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\font\vjs.ttf" id="unit-34" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\video-js\font\vjs.woff" id="unit-35" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\js\choicesystem.js" id="unit-36" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\js\familytree.js" id="unit-37" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\js\jquery.js" id="unit-38" media-type="text/javascript"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\images\paper-background-ink-inverted.png" id="unit-39" media-type="image/png"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\images\paper-background-ink.png" id="unit-40" media-type="image/png"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\images\section-break-inverted.png" id="unit-41" media-type="image/png"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\images\section-break.png" id="unit-42" media-type="image/png"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\arvo-bold.otf" id="unit-43" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\arvo-bold.ttf" id="unit-44" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\Arvo-Italic.otf" id="unit-45" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\Arvo-Italic.ttf" id="unit-46" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\arvo-regular.otf" id="unit-47" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\arvo-regular.ttf" id="unit-48" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\esteban-regular.otf" id="unit-49" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\fonts\esteban-regular.ttf" id="unit-50" media-type="application/octet-stream"/>
+    <item href="ebooks/1bC9vpwrLK/OPS\assets\css\styles.css" id="unit-51" media-type="text/css"/>
+
+
+  </manifest>
+  <spine page-progression-direction="ltr" toc="toc-ncf">
+      <itemref idref="chapter0" />
+  </spine>
+</package>
