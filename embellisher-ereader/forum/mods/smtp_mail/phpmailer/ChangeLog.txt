@@ -92,7 +92,7 @@ Version 2.0.0 rc2 (Fri, Nov 16 2007), interim release
 * POP-before-SMTP functionality included, thanks to Richard Davey
   (see class.pop3.php & pop3_before_smtp_test.php for examples)
 * included example showing how to use PHPMailer with GMAIL
-* fixed the missing Cc in SendMail() and Mail()
+* fixed the missing Cc in sendmail.php() and Mail()
 
 ******************
 A note on sending bulk emails:
@@ -121,10 +121,10 @@ Version 2.0.0 rc1 (Thu, Nov 08 2007), interim release
 * dramatically simplified using inline graphics ... it's fully automated and requires no user input
 * added automatic document type detection for attachments and pictures
 * added MsgHTML() function to replace Body tag for HTML emails
-* fixed the SendMail security issues (input validation vulnerability)
+* fixed the sendmail.php security issues (input validation vulnerability)
 * enhanced the AddAddresses functionality so that the "Name" portion is used in the email address
 * removed the need to use the AltBody method (set from the HTML, or default text used)
-* set the PHP Mail() function as the default (still support SendMail, SMTP Mail)
+* set the PHP Mail() function as the default (still support sendmail.php, SMTP Mail)
 * removed the need to set the IsHTML property (set automatically)
 * added Estonian language file by Indrek P&auml;ri
 * added header injection patch
@@ -202,7 +202,7 @@ Version 1.62 (Wed, Jun 26 2002)
 * Changed documentation to phpDocumentor format
 
 Version 1.60 (Sat, Mar 30 2002)
-* Sendmail pipe and address patch (Christian Holtje)
+* sendmail.php pipe and address patch (Christian Holtje)
 * Added embedded image and read confirmation support (A. Ognio)
 * Added unit tests
 * Added SMTP timeout support (*nix only)
@@ -273,10 +273,10 @@ Version 1.15 (Fri, Jun 15 2001)
 [Note: these changes contributed by Patrice Fournier]
 * Changed all remaining \n to \r\n
 * Bcc: header no longer writen to message except
-when sent directly to sendmail
+when sent directly to sendmail.php
 * Added a small message to non-MIME compliant mail reader
 * Added Sender variable to change the Sender email
-used in -f for sendmail/mail and in 'MAIL FROM' for smtp mode
+used in -f for sendmail.php/mail and in 'MAIL FROM' for smtp mode
 * Changed boundary setting to a place it will be set only once
 * Removed transfer encoding for whole message when using multipart
 * Message body now uses Encoding in multipart messages
@@ -301,7 +301,7 @@ Version 1.06 (Fri, Jun 01 2001)
 
 Version 1.05 (Tue, May 29 2001)
 * Code cleanup
-* Eliminated sendmail header warning message
+* Eliminated sendmail.php header warning message
 * Fixed possible SMTP error
 
 Version 1.03 (Thu, May 24 2001)
@@ -309,7 +309,7 @@ Version 1.03 (Thu, May 24 2001)
 
 Version 1.02 (Wed, May 23 2001)
 * Added multiple recipient and attachment Clear* methods
-* Added Sendmail public variable
+* Added sendmail.php public variable
 * Fixed problem with loading SMTP library multiple times
 
 Version 0.98 (Tue, May 22 2001)

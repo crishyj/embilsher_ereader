@@ -35,7 +35,7 @@ if ($user = $RES->fetch_assoc()){
     // Deze functie zal kijken of de inlog gegevens kloppen
     function validate_login($username,$password,$password2,$salt)
     {
-		$password = crypt($password,$password2);
+		$password = md5($password);
 		if ($password2 != $password)
 		{
 			return FALSE;

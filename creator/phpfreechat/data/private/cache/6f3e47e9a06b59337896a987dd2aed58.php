@@ -11,7 +11,7 @@
   'nickmeta_key_to_hide' => 
   array (
   ),
-  'firstisadmin' => false,
+  'firstisadmin' => true,
   'title' => 'Embellischer Chat',
   'max_channels' => 10,
   'max_privmsg' => 5,
@@ -134,7 +134,7 @@
     14 => '#4C4C4C',
     15 => '#959595',
   ),
-  'theme' => 'sg',
+  'theme' => 'default',
   'theme_path' => 'E:\\WEB\\2020-07\\James project\\complete sources\\creator\\phpfreechat\\src/../themes',
   'theme_url' => 'data/public/themes',
   'theme_default_path' => 'E:\\WEB\\2020-07\\James project\\complete sources\\creator\\phpfreechat\\src/../themes',

@@ -13,7 +13,7 @@ $newpassword =  $_POST["newpassword"] ;
 
 $pass = "";
 if ($newpassword != "" && strlen($newpassword) > 3){
-	$pass = $DB->real_escape_string(crypt($newpassword,$salt));
+	$pass = $DB->real_escape_string(md5($newpassword,$salt));
 }elseif ($newpassword != ""){
 	$result['msg'] = "New password should be at least 4 characters long!";
 	echo json_encode($result);

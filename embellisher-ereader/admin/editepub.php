@@ -1,5 +1,6 @@
 <?php
         require 'header.php';
+
         if (isset($_GET['id'])) {
             $id = $DB->real_escape_string($_GET['id']);
             $SQL = "SELECT * FROM library WHERE id='$id'";
@@ -65,13 +66,19 @@
                             <label for="genre">Genre:</label>
                             <select class="form-control" name="genre" id="genre" required="required">
                                 <?php
+                                    $new_genres = $_SESSION['genres'];
+
+                                    if($_SESSION['genres']){
+                                    $genres = explode(',', $new_genres);
+                                    array_unshift($genres, '');
+                                    }
                                     foreach ($genres as $key => $value) {
                                         echo '<option value="'.$value.'"';
                                         if ($epub['genre'] == $value) {
                                             echo ' selected';
                                         }
                                         echo '>'.$value.'</option>';
-                                    }
+                                    }123
                                     ?>
                             </select>
                         </div>

@@ -81,12 +81,12 @@
                             <label for="registertype">Select type:</label>
                             <select class="form-control" name="type" id="registertype">
                                 <option value="Reader" <?php if ($user['type'] == 'Reader') {
-        echo 'selected';
-    }?>>Reader
+                                        echo 'selected';
+                                    }?>>Reader
                                 </option>
                                 <option value="Author" <?php if ($user['type'] == 'Author') {
-        echo 'selected';
-    }?>>Author
+                                        echo 'selected';
+                                    }?>>Author
                                 </option>
                             </select>
                         </div>
@@ -94,28 +94,28 @@
                             <label for="registeradmin">Select account type:</label>
                             <select class="form-control" name="admin" id="registeradmin">
                                 <option value="-1" <?php if ($user['admin'] == '-1') {
-        echo 'selected';
-    }?>>Read only user
+                                        echo 'selected';
+                                    }?>>Read only user
                                 </option>
                                 <option value="0" <?php if ($user['admin'] == '0') {
-        echo 'selected';
-    }?>>Publisher
+                                        echo 'selected';
+                                    }?>>Publisher
                                 </option>
                                 <option value="1" <?php if ($user['admin'] == '1') {
-        echo 'selected';
-    }?>>Admin</option>
+                                        echo 'selected';
+                                    }?>>Admin</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="status">Select Creator Studio type:</label>
                             <select class="form-control" name="status" id="status">
                                 <option value="1" <?php if ($user['status'] != '2') {
-        echo 'selected';
-    }?>>Standard Access
+                                        echo 'selected';
+                                    }?>>Standard Access
                                 </option>
                                 <option value="2" <?php if ($user['status'] == '2') {
-        echo 'selected';
-    }?>>Full Access
+                                        echo 'selected';
+                                    }?>>Full Access
                                 </option>
                             </select>
                         </div>
@@ -123,11 +123,11 @@
                             <label for="allfree">All Books Free:</label>
                             <select class="form-control" name="allfree" id="allfree">
                                 <option value="0" <?php if ($user['allfree'] == 0) {
-        echo 'selected';
-    }?>>No</option>
+                                        echo 'selected';
+                                    }?>>No</option>
                                 <option value="1" <?php if ($user['allfree'] == 1) {
-        echo 'selected';
-    }?>>Yes</option>
+                                        echo 'selected';
+                                    }?>>Yes</option>
                             </select>
                         </div>
                         <button type="submit" name="changeuser" id="buttRegisterProfile" tabindex="1000"

@@ -14,14 +14,28 @@
         }
     }
 
+    if(isset($_POST['savegenre'])){
+        $genres = $DB->real_escape_string($_POST['genre']);
+        $user_id = $_SESSION['user_id'];
+        $SQL = "UPDATE user SET genres = '$genres' WHERE id='$user_id'";
+        if ($r = $DB->query($SQL)) {
+            $sucess = 'Category or Genre settings updated.';
+        } else {
+            $err = 'Error updating Category or Genre settings.';
+        }
+    }
+
     $publickey = '';
     $privatekey = '';
+    $genres = '';
     $user_id = $_SESSION['user_id'];
-    $SQL = "SELECT stripe_public,stripe_private FROM  user WHERE id='$user_id'";
+    $SQL = "SELECT * FROM  user WHERE id='$user_id'";
     $r = $DB->query($SQL);
     $keys = $r->fetch_assoc();
     $privatekey = htmlentities($keys['stripe_private']);
     $publickey = htmlentities($keys['stripe_public']);
+    $genres = htmlentities($keys['genres']);
+    $_SESSION['genres'] = $genres;
 
 ?>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -34,30 +48,27 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Month', 'Sales', 'Buyers'],
-        <
-        ? php
-        $months = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Sep", "Nov", "Dec");
-        $m = 0;
-        $SQL =
-        "SELECT SUM(t.price/100) as monthsales, COUNT(t.price) as monthbuyers, MONTH(t.transactiondate)  as m FROM library as l, transactions as t WHERE l.owner = '$user_id' and l.id = t.libraryid GROUP BY MONTH(t.transactiondate) ORDER BY MONTH(t.transactiondate)";
-        $RES = $DB - > query($SQL);
-        $exist = false;
-        while ($sold = $RES - > fetch_assoc()) {
-            if ($sold['monthsales'] != "") {
-                for ($temp = $m; $temp < $sold['m'] - 1; $temp++) {
-                    echo '["'.$months[$temp].
-                    '",0,0],';
+        <?php
+            $months = array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Oct", "Sep", "Nov", "Dec");
+            $m = 0;
+            $SQL ="SELECT SUM(t.price/100) as monthsales, COUNT(t.price) as monthbuyers, MONTH(t.transactiondate)  as m FROM library as l, transactions as t WHERE l.owner = '$user_id' and l.id = t.libraryid GROUP BY MONTH(t.transactiondate) ORDER BY MONTH(t.transactiondate)";
+            $RES = $DB -> query($SQL);
+            $exist = false;
+            while ($sold = $RES -> fetch_assoc()) {
+                if ($sold['monthsales'] != "") {
+                    for ($temp = $m; $temp < $sold['m'] - 1; $temp++) {
+                        echo '["'.$months[$temp].
+                        '",0,0],';
+                    }
+                    $exist = true;
+                    $m = $sold['m'] - 1;
+                    echo '["'.$months[$m].
+                    '",'.$sold['monthsales'].
+                    ','.$sold['monthbuyers'].
+                    '],';
                 }
-                $exist = true;
-                $m = $sold['m'] - 1;
-                echo '["'.$months[$m].
-                '",'.$sold['monthsales'].
-                ','.$sold['monthbuyers'].
-                '],';
             }
-        }
-        ?
-        >
+        ?>        
     ]);
 
     var options = {
@@ -74,39 +85,43 @@ function drawChart() {
 </script>
 
 <div id="app-container">
-    <?php if (isset($err)) {
+    <?php 
+        if (isset($err)) 
+        {
     ?>
-    <!-- Alert kan zijn: alert-info, alert-warning en alert-danger -->
-    <div class="alert alert-danger alert-dismissable">
-
-        <h4>
-            Warning!
-        </h4> <?php echo $err; ?>
-    </div>
+            <div class="alert alert-danger alert-dismissable">
+                <h4>
+                    Warning!
+                </h4> <?php echo $err; ?>
+            </div>
     <?php
-} ?>
-    <?php if (isset($sucess)) {
-        ?>
-    <!-- Alert kan zijn: alert-info, alert-warning en alert-danger -->
-    <div class="alert alert-success alert-dismissable">
+        } 
+    ?>
+    <?php 
+        if (isset($sucess)) 
+        {
+    ?>
+        <div class="alert alert-success alert-dismissable">
 
-        <h4>
-            Success!
-        </h4> <?php echo $sucess; ?>
-    </div>
+            <h4>
+                Success!
+            </h4> <?php echo $sucess; ?>
+        </div>
     <?php
-    } ?>
+        } 
+    ?>
 
     <div class="jumbotron">
         <div class="container">
 
             <h2>Welcome <?php echo $_SESSION['display_name']; ?>,</h2>
             <p>Here you can manage your ebooks and view the latest transactions.</p>
-            <?php if ($_SESSION['type'] == 1) {
-        ?>
-            <a href="users.php" class="btn btn-primary">User management</a>
+            <?php if ($_SESSION['type'] == 1) 
+            {
+            ?>
+                <a href="users.php" class="btn btn-primary">User management</a>
             <?php
-    } ?>
+            } ?>
             <a href="storeitems.php" class="btn btn-primary">Store management</a>
         </div>
     </div>
@@ -195,11 +210,13 @@ function drawChart() {
             </div>
 
             <div class="col-md-12" style="clear:both; height:40px;"></div>
-            <?php if ($exist) {
-                ?>
-            <div class="col-md-12" style="clear:both; height:300px;" id="chart_div"></div>
-            <?php
-            } ?>
+            <?php 
+                if ($exist) {
+                    echo"    
+                        <div class='col-md-12' style='clear:both; height:300px;' id='chart_div'></div>
+                        ";
+                }
+            ?>
 
             <div class="panel panel-success" style="clear:both;">
                 <div class="panel-heading">
@@ -258,6 +275,28 @@ function drawChart() {
                     </form>
                 </div>
             </div>
+            <?php if ($_SESSION['type'] == 1) 
+            {
+            ?>
+                <div class = "panel panel-info">
+                    <div class="panel-heading">
+                        <h2 class = "panel-title">Custom Category or Genre Settings</h2>
+                        <br>
+                        <p>If you will not input this field, the app will provide the default genres.</p>
+                    </div>
+                    <div class="panel-body">
+                        <form action="" method = "post" role = "form">
+                            <div class="form-group">
+                                <label for="genres">Category or Genre</label>
+                                <textarea name="genre" id="genre" rows="3" class = "form-control"><?php echo($genres);?></textarea>
+                            </div>
+                            <button type="submit" id="savegenre" name="savegenre" tabindex="1000"
+                            class="btn btn-primary" title="save" aria-label="save">Save</button><br />
+                        </form>
+                    </div>
+                </div>
+            <?php
+            }?>
         </div>
     </div>
 </div>

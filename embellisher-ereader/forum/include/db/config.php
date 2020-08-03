@@ -8,20 +8,21 @@ provider for advice.
 
 */
 
-if (!defined('PHORUM')) return;
+if (!defined('PHORUM')) {
+    return;
+}
 
-$PHORUM['DBCONFIG']=array(
-
+$PHORUM['DBCONFIG'] = array(
     // Database connection. See the end of this file for a detailed
     // description of the configuration options.
-    'type'          => 'mysql',
-    'name'          => 'emrepubl_ereaderforum',
-    'server'        => 'localhost',
-    'user'          => 'root',
-    'password'      => '',
-    'table_prefix'  => 'phorum',
-    'port'          => '3306',
-    'socket'        => NULL,
+    'type' => 'mysql',
+    'name' => 'emrepubl_beenfm',
+    'server' => 'localhost',
+    'user' => 'root',
+    'password' => '',
+    'table_prefix' => 'phorum',
+    'port' => '3306',
+    'socket' => null,
 
     // An optional URL to redirect the user to when the database is down.
     // If you want to use this option, then remove the "//" in front of it.
@@ -32,7 +33,6 @@ $PHORUM['DBCONFIG']=array(
     // in front of it.
     //'upgrade_page'  => 'http://www.example.com/phorum/upgrade.html',
 
-
     // Specific options for the "mysql" database layer type.
     // -----------------------------------------------------------------
 
@@ -40,14 +40,14 @@ $PHORUM['DBCONFIG']=array(
     // "mysqli_replication" for master/slave setups.
     // If NULL, Phorum will autodetect the extension to use.
     // See the end of this file for a detailed description of this option.
-    'mysql_php_extension' =>  NULL,
+    'mysql_php_extension' => null,
 
     // Full text searching? 1=enabled, 0=disabled
     // This option determines whether Phorum will use MySQL's full text
     // algorithm for searching postings. If enabled, searching for postings
     // will be much faster. You will have to disable this feature in case
     // you are running a database version prior to MySQL 4.0.18.
-    'mysql_use_ft'  =>  '1',
+    'mysql_use_ft' => '1',
 
     // Don't populate the search table for mysql fulltext search
     // (useful if you use a alternate search backend which doesn't use
@@ -68,7 +68,6 @@ $PHORUM['DBCONFIG']=array(
     // If you do not do this, all queries will go to the master server anyway.
     // See the end of this file for a detailed description of this option.
     'slaves' => array(),
-
 );
 
 /*
@@ -171,4 +170,3 @@ DETAILED CONFIGURATION FIELD DESCRIPTION
     )
 
 */
-?>

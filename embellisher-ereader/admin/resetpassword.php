@@ -21,7 +21,7 @@ if (!empty($_POST['email'])) {
 
     if ($rij = $result->fetch_assoc()) {
         $newpassori = generateRandomString(8);
-        $newpass = $DB->real_escape_string(crypt($newpassori));
+        $newpass = $DB->real_escape_string(md5($newpassori));
         $uid = $rij['id'];
         $UPDATESQL = "UPDATE user SET password='$newpass' WHERE id='$uid'";
         $DB->query($UPDATESQL);

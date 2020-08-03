@@ -1,9 +1,9 @@
-yes-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 10, 2020 at 11:06 PM
+-- Generation Time: Jul 30, 2020 at 02:02 AM
 -- Server version: 10.3.23-MariaDB
 -- PHP Version: 7.3.6
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `emrepubl_emtest`
+-- Database: `ereader`
 --
 
 -- --------------------------------------------------------
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `emailtemplates` (
   `id` int(11) NOT NULL,
   `name` varchar(64) NOT NULL,
-  `content` longtext NOT NULL DEFAULT '',
+  `content` longtext NOT NULL,
   `day` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -53,7 +53,7 @@ CREATE TABLE `library` (
   `genre` varchar(128) NOT NULL DEFAULT '',
   `preload` int(11) NOT NULL DEFAULT 0,
   `owner` int(11) NOT NULL DEFAULT 0,
-  `excerpt` mediumtext NOT NULL DEFAULT ''
+  `excerpt` mediumtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -69,7 +69,6 @@ CREATE TABLE `private_audio` (
   `name` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-
 -- --------------------------------------------------------
 
 --
@@ -81,10 +80,9 @@ CREATE TABLE `private_chapters` (
   `bookid` int(11) NOT NULL,
   `chapter_nr` int(11) NOT NULL DEFAULT 0,
   `title` varchar(128) NOT NULL DEFAULT '',
-  `content` longblob NOT NULL DEFAULT '',
-  `headercontent` blob NOT NULL DEFAULT ''
+  `content` longblob NOT NULL,
+  `headercontent` blob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 -- --------------------------------------------------------
 
@@ -108,7 +106,6 @@ CREATE TABLE `private_library` (
   `pagination` varchar(4) NOT NULL DEFAULT 'ltr'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 -- --------------------------------------------------------
 
 --
@@ -122,6 +119,18 @@ CREATE TABLE `private_video` (
   `name` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `private_vimeo`
+--
+
+CREATE TABLE `private_vimeo` (
+  `id` int(10) NOT NULL,
+  `bookid` int(10) DEFAULT NULL,
+  `vimeoLink` text DEFAULT NULL,
+  `name` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -185,6 +194,9 @@ CREATE TABLE `user` (
   `storeid` int(11) NOT NULL DEFAULT 0,
   `admin` int(5) NOT NULL DEFAULT 0,
   `allfree` int(11) NOT NULL DEFAULT 0,
+  `genres` TEXT NOT NULL DEFAULT '',
+  `category` varchar(256) NOT NULL DEFAULT '',
+  `job` TEXT NOT NULL DEFAULT '',
   `stripe_public` varchar(64) NOT NULL DEFAULT '',
   `stripe_private` varchar(64) NOT NULL DEFAULT '',
   `registerdate` timestamp NOT NULL DEFAULT current_timestamp()
@@ -194,9 +206,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `email`, `name`, `type`, `genre_of_writing`, `status`, `public_private`, `interests`, `sessionid`, `password`, `maxsessions`, `storeid`, `admin`, `allfree`, `stripe_public`, `stripe_private`, `registerdate`) VALUES
-(1, 'admin@admin.com', 'admin', '', '', '', '', '', '', '$2a$07$hallothisisa22stringhOoRZCFu5RcMDLlXkme8GttQ9kKfyG98e', 1, 0, 1, 0, '', '', '2020-07-10 07:55:33');
-
+INSERT INTO `user` (`id`, `email`, `name`, `type`, `genre_of_writing`, `status`, `public_private`, `interests`, `sessionid`, `password`, `maxsessions`, `storeid`, `admin`, `allfree`, `genres`, `category`, `job`, `stripe_public`, `stripe_private`, `registerdate`) VALUES
+(1, 'admin@admin.com', 'admin', '', '', '', '', '', '', '21232f297a57a5a743894a0e4a801fc3', 1, 0, 1, 0, '', '', '', '', '','2020-07-30 08:56:43'),
+(2, 'jamesmusgrave2122@att.net', 'James Musgrave', 'Author', '', '2', '', '', '', '37f40b53458b52d884fc22ed04b24857', 1, 1, 1, 1, '', '', '', '', '', '2020-07-30 09:00:02');
 
 -- --------------------------------------------------------
 
@@ -251,6 +263,12 @@ ALTER TABLE `private_video`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `private_vimeo`
+--
+ALTER TABLE `private_vimeo`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `promocodes`
 --
 ALTER TABLE `promocodes`
@@ -302,25 +320,31 @@ ALTER TABLE `library`
 -- AUTO_INCREMENT for table `private_audio`
 --
 ALTER TABLE `private_audio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `private_chapters`
 --
 ALTER TABLE `private_chapters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `private_library`
 --
 ALTER TABLE `private_library`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `private_video`
 --
 ALTER TABLE `private_video`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `private_vimeo`
+--
+ALTER TABLE `private_vimeo`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `promocodes`
@@ -344,7 +368,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_library`

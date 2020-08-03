@@ -125,7 +125,8 @@ p {
 
 /* line 66, ../sass/viewer/_core.scss */
 #ee-soundtrack-body,
-#ee-videotrack-body {
+#ee-videotrack-body,
+#ee-vimeotrack-body {
   display: none;
   position: absolute;
   right: 0;
@@ -138,12 +139,14 @@ p {
   font-family: sans-serif; }
   /* line 82, ../sass/viewer/_core.scss */
   #ee-soundtrack-body h1,
-  #ee-videotrack-body h1 {
+  #ee-videotrack-body h1,
+  #ee-vimeotrack-body h1 {
     margin: 30px 0 12px;
     font-size: 24px; }
   /* line 87, ../sass/viewer/_core.scss */
   #ee-soundtrack-body #now-playing,
-  #ee-videotrack-body #now-playing {
+  #ee-videotrack-body #now-playing,
+  #ee-vimeotrack-body #now-playing {
     color: #F27600;
     text-align: center;
     margin: 30px 0 12px;
@@ -152,39 +155,46 @@ p {
     width: 100%; }
     /* line 96, ../sass/viewer/_core.scss */
   #ee-soundtrack-body #now-playing .icon-loop, #ee-soundtrack-body #now-playing .icon-playthru,
-  #ee-videotrack-body #now-playing .icon-loop, #ee-videotrack-body #now-playing .icon-playthru {
+  #ee-videotrack-body #now-playing .icon-loop, #ee-videotrack-body #now-playing .icon-playthru,
+  #ee-vimeotrack-body #now-playing .icon-loop, #ee-vimeotrack-body #now-playing .icon-playthru {
     background-color: transparent;
     color: #404040;
     font-size: 20px;
     text-align: center; }
     /* line 104, ../sass/viewer/_core.scss */
   #ee-soundtrack-body #now-playing .icon-loop.active, #ee-soundtrack-body #now-playing .icon-playthru.active,
-  #ee-videotrack-body #now-playing .icon-loop.active, #ee-videotrack-body #now-playing .icon-playthru.active {
+  #ee-videotrack-body #now-playing .icon-loop.active, #ee-videotrack-body #now-playing .icon-playthru.active,
+  #ee-vimeotrack-body #now-playing .icon-loop.active, #ee-vimeotrack-body #now-playing .icon-playthru.active {
         color: #F27600; }
   /* line 110, ../sass/viewer/_core.scss */
   #ee-soundtrack-body audio,
-  #ee-videotrack-body audio {
+  #ee-videotrack-body video,
+  #ee-vimeotrack-body iframe {
     width: 100%;
     padding: 8px; }
   /* line 115, ../sass/viewer/_core.scss */
   #ee-soundtrack-body h3.recommended-listening,
-  #ee-videotrack-body h3.recommended-listening {
+  #ee-videotrack-body h3.recommended-listening,
+  #ee-vimeotrack-body h3.recommended-listening {
     color: #404040;
     padding-bottom: 4px;
     text-align: center; }
   /* line 121, ../sass/viewer/_core.scss */
   #ee-soundtrack-body .recommended-listening,
-  #ee-videotrack-body .recommended-listening {
+  #ee-videotrack-body .recommended-listening,
+  #ee-vimeotrack-body .recommended-listening {
     font-weight: bold; }
   /* line 125, ../sass/viewer/_core.scss */
   #ee-soundtrack-body li.recommended-listening,
-  #ee-videotrack-body li.recommended-listening  {
+  #ee-videotrack-body li.recommended-listening,
+  #ee-vimeotrack-body li.recommended-listening  {
     border-bottom-color: #404040;
     border-bottom-style: solid;
     border-bottom-width: 1px; }
   /* line 134, ../sass/viewer/_core.scss */
   #ee-soundtrack-body ul li,
-  #ee-videotrack-body ul li {
+  #ee-videotrack-body ul li,
+  #ee-vimeotrack-body ul li {
     list-style-type: none;
     padding: 8px 10px;
     background: #ddd;
@@ -195,7 +205,8 @@ p {
     background: linear-gradient(#eeeeee, #dddddd); }
     /* line 25, ../../../../../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-recipes-0.3.0/stylesheets/recipes/ui/_convex.scss */
     #ee-soundtrack-body ul li:hover, #ee-soundtrack-body ul li:focus,
-    #ee-videotrack-body ul li:hover, #ee-videotrack-body ul li:focus {
+    #ee-videotrack-body ul li:hover, #ee-videotrack-body ul li:focus, 
+    #ee-vimeotrack-body ul li:hover, #ee-vimeotrack-body ul li:focus  {
       background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2RkZGRkZCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2VlZWVlZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
       background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #dddddd), color-stop(100%, #eeeeee));
       background: -moz-linear-gradient(#dddddd, #eeeeee);
@@ -203,12 +214,14 @@ p {
       background: linear-gradient(#dddddd, #eeeeee); }
     /* line 140, ../sass/viewer/_core.scss */
     #ee-soundtrack-body ul li.active,
-    #ee-videotrack-body ul li.active {
+    #ee-videotrack-body ul li.active,
+    #ee-vimeotrack-body ul li.active {
       color: #F27600;
       font-style: italic; }
   /* line 147, ../sass/viewer/_core.scss */
   #ee-soundtrack-body button.close,
-  #ee-videotrack-body button.close {
+  #ee-videotrack-body button.close,
+  #ee-vimeotrack-body button.close {
     color: #1AA4AF;
     position: absolute;
     left: 10px;
@@ -235,9 +248,17 @@ p {
   width: 29.99%; 
 }
 
-.video-visible #ee-videotrack-body video{
+.vimeo-visible #ee-vimeotrack-body {
+  display: inline-block;
+  width: 29.99%; 
+}
+
+.video-visible #ee-videotrack-body video,
+.vimeo-visible #ee-vimeotrack-body iframe{
   width: 100%;
 }
+
+
 /* line 172, ../sass/viewer/_core.scss */
 .eest-visible #reading-area {
   right: 30%; }

@@ -1,10 +1,10 @@
 /* --- CONTENT --- */
 div.content {
-  margin: 0em;
-  padding: 0em;
-  margin-left: 0em;
+  margin: 0.5em;
+  padding: 1em;
+  margin-left: 12.2em;
   background-color: #FFF;
-  border: 0px #acd233 solid;
+  border: 1px #acd233 solid;
   /*min-height: 15em;*/
 }
 div.content * { margin-top: 0.5em; margin-bottom: 0.5em; }

@@ -1,6 +1,8 @@
 <?php
         ini_set('max_execution_time', 60000);
         require 'header.php';
+              
+        $err = '';
         function rmdir_recursive($dir)
         {
             foreach (scandir($dir) as $file) {
@@ -29,6 +31,7 @@
             if (!isset($_POST['price'])) {
                 $err = 'Please fill in a price.';
             }
+
             $epublocationchange = '';
             if ($_FILES['epub']['name']) {
                 $filename = $_FILES['epub']['name'];
@@ -51,7 +54,7 @@
                 if (!$continue) {
                     $err = 'The epub file you are trying to upload is not a .zip or epub file. Please try again.';
                 } else {
-                    $path = dirname(__FILE__).'/'; // absolute path to the directory where zipper.php is in
+                    $path = dirname(__FILE__); // absolute path to the directory where zipper.php is in
                     $filenoext = basename($filename, '.zip'); // absolute path to the directory where zipper.php is in (lowercase)
                     $filenoext = basename($filenoext, '.ZIP');
                     $filenoext = basename($filenoext, '.epub');
@@ -85,7 +88,7 @@
                             $pathinfo = $DB->real_escape_string($pathinfo);
                         }
                         $message = 'Your zip or epub file was uploaded and unpacked.';
-                        $epublocation = $SERVERURL.'/'.$targetdir;
+                        $epublocation = $SERVERURL.$targetdir;
                         $epublocationchange = ", rootUrl='".$DB->real_escape_string($epublocation)."', packagePath = '".$pathinfo."'";
                     } else {
                         $err = 'There was a problem with the epub upload. Please try again.';
@@ -168,7 +171,7 @@
                 if (!$continue) {
                     $err = 'The epub file you are trying to upload is not a .zip file. Please try again.';
                 } else {
-                    $path = dirname(__FILE__).'/'; // absolute path to the directory where zipper.php is in
+                    $path = dirname(__FILE__); // absolute path to the directory where zipper.php is in
                     $filenoext = basename($filename, '.zip'); // absolute path to the directory where zipper.php is in (lowercase)
                     $filenoext = basename($filenoext, '.ZIP'); // absolute path to the directory where zipper.php is in (when uppercase)
                     $filenoext = basename($filenoext, '.epub');
@@ -209,7 +212,7 @@
                             $pathinfo = $DB->real_escape_string($pathinfo);
                         }
                         $message = 'Your ebook file was uploaded and unpacked.';
-                        $epublocation = $SERVERURL.'/'.$targetdir;
+                        $epublocation = $SERVERURL.$targetdir;
                     } else {
                         $err = 'There was a problem with the epub upload. Please try again.';
                     }
@@ -233,7 +236,7 @@
                     $err = 'The cover image file you are trying to upload is not an image. Please try again.';
                 } else {
                     /* PHP current path */
-                    $path = dirname(__FILE__).'/'; // absolute path to the directory where we are
+                    $path = dirname(__FILE__); // absolute path to the directory where we are
                     $duplicatecounter = 0;
                     $targetdir = 'coverimages/'.$duplicatecounter;
                     $originaltarget = 'coverimages/';
@@ -248,7 +251,7 @@
                     /* here it is really happening */
 
                     if (move_uploaded_file($source, $targetdir.'/'.$filename)) {
-                        $coverlocation = $SERVERURL.'/'.$targetdir.'/'.$filename;
+                        $coverlocation = $SERVERURL.$targetdir.'/'.$filename;
                         $message = 'Your .zip file was uploaded and unpacked.';
                     } else {
                         $err = 'There was a problem with the upload of the coverimage. Please try again.';
@@ -262,7 +265,16 @@
                 $INSERTEPUB = "INSERT INTO library (title,author,coverHref,packagePath,rootUrl,price,description,genre,preload,excerpt,owner) VALUES('$title','$author','$coverlocation','$pathinfo','$epublocation','$price','$description','$genre','$preload','$excerpt','$user_id')";
                 //$DB->query($INSERTEPUB);
                 if ($DB->query($INSERTEPUB)) {
-                    $success = 'Succesfully added epub!';
+                    $GETEPUB = "SELECT * FROM library WHERE owner = '$user_id' && rootUrl = '$epublocation'";
+                    $RES = $DB->query($GETEPUB);
+                    while ($epub = $RES->fetch_assoc()) {
+                        $library_id = $epub['id'];
+                    }
+                    $INSERTULIB = "INSERT INTO user_library (userid, libraryid) VALUES('$user_id', '$library_id')";
+                    if($DB->query($INSERTULIB)){
+                        $success = 'Succesfully added epub!';
+                    }
+                    
                 } else {
                     $err = 'Query failed, with error: '.$DB->error;
                 }
@@ -274,13 +286,12 @@
 <div id="app-container">
     <?php if (isset($err)) {
             ?>
-    <!-- Alert kan zijn: alert-info, alert-warning en alert-danger -->
-    <div class="alert alert-danger alert-dismissable">
-
+    <!-- <div class="alert alert-danger alert-dismissable">
         <h4>
             Error!
-        </h4> <?php echo htmlspecialchars($err); ?>
-    </div>
+        </h4>
+         <?php echo htmlspecialchars($err); ?>
+    </div> -->
     <?php
         } ?>
     <?php if (isset($success)) {
@@ -300,6 +311,19 @@
             <p>Publish your ebooks to the Embellisher Ereader.<br />
         </div>
     </div>
+
+    <?php
+      $new_genres = $_SESSION['genres'];
+
+      if($_SESSION['genres']){
+        $genres = explode(',', $new_genres);
+        array_unshift($genres, '');
+      }
+      else{
+        $genres = array('', 'Drama', 'Fable', 'Fairy Tale', 'Fantasy', 'Fiction', 'Fiction in Verse', 'Folklore', 'Historical Fiction', 'Horror', 'Humor', 'Legend', 'Mystery', 'Mythology', 'Poetry', 'Realistic Fiction', 'Science Fiction', 'Short Story', 'Steampunk', 'Tall Tale', 'Biography/Autobiography', 'Essay', 'Narrative Nonfiction', 'Nonfiction', 'Speech');
+      }
+      
+    ?>
 
     <div class="col-md-4">
         <div id="tab-user-register" class="tab-pane active">
@@ -338,7 +362,7 @@
                             <textarea class="form-control" name="excerpt" id="excerpt"> </textarea>
                         </div>
                         <div class="form-group">
-                            <label for="genre">Genre:</label>
+                            <label for="genre">Genre or Category:</label>
                             <select class="form-control" name="genre" id="genre" required="required">
                                 <?php
                                         foreach ($genres as $key => $value) {

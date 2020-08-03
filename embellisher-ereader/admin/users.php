@@ -41,7 +41,7 @@
                         if ($user = $RES->fetch_assoc()){
                             $err .= "User '$username' already exists.<br/>";
                         }else{
-                            $pass = $DB->real_escape_string(crypt($password));
+                            $pass = $DB->real_escape_string(md5($password));
                             $SQL = "INSERT INTO user (name,type,email,password,admin,status,maxsessions,allfree,storeid) VALUES ('$name','$type', '$username','$pass','$admin','$status','$maxsessions','$allfree','$storeid')";
                             $RES = $DB->query($SQL);
                             $userid = $DB->insert_id;
@@ -106,7 +106,7 @@
             if ($user = $RES->fetch_assoc()){
                 $err = "User already exists.";
             }else{
-                $pass = $DB->real_escape_string(crypt($password));
+                $pass = $DB->real_escape_string(md5($password));
                 $SQL = "INSERT INTO user (name,type,email,password,admin,status,maxsessions,allfree,storeid) VALUES ('$name','$type', '$username','$pass','$admin','$status','$maxsessions','$allfree','$storeid')";
                 $RES = $DB->query($SQL);
                 $userid = $DB->insert_id;
@@ -143,7 +143,7 @@
 
             
             if ($password != ""){
-                $password = $DB->real_escape_string(crypt($password));
+                $password = $DB->real_escape_string(md5($password));
                 $passwordset = ", password='".$password."'";
             }
 
@@ -164,9 +164,6 @@
                     $err = "There was a problem in the sql".$DB->error;
                 }
             }
-
-            
-            
         }     
 
         include 'menu.php';
@@ -461,6 +458,7 @@
                     </div>
 
                     <?php } ?>
+                    
 
                     <div class="panel panel-info">
                         <div class="panel-heading">
@@ -478,16 +476,37 @@
                                     <th>Interests</th>  
                                     <th style="display:none;">Max sessions</th>
                                     <th>All Free</th>
+                                    <th>Job</th>
                                     <th></th>
                                   </tr>  
                                 </thead>  
                                 <tbody>                    
                             <?php
 
+                                
+
                                 $SQL = "SELECT * FROM user WHERE id NOT IN $pubs ORDER BY name";
                                 if (SEPARATE_ADMINS){ 
                                     $storeid = $_SESSION['user_id'];
-                                    $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid ORDER BY name";
+                                    if($_SESSION['user_name'] == 'corporate@emrepublishing.com'){
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid AND category = 'Corporate' ORDER BY name";
+                                    }
+                                    elseif($_SESSION['user_name'] == 'education@emrepublishing.com'){
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid AND category = 'Education' ORDER BY name";
+                                    }
+                                    elseif($_SESSION['user_name'] == 'faithbased@emrepublishing.com'){
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid AND category = 'Faith-Based' ORDER BY name";
+                                    }
+                                    elseif($_SESSION['user_name'] == 'government@emrepublishing.com'){
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid AND category = 'Government' ORDER BY name";
+                                    }
+                                    elseif($_SESSION['user_name'] == 'healthcare@emrepublishing.com'){
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid AND category = 'Healthcare' ORDER BY name";
+                                    }
+                                    else{
+                                        $SQL = "SELECT * FROM user WHERE id NOT IN $pubs AND storeid <> $storeid ORDER BY name";
+                                    }
+                                    
                                 }
                                 $all_emails = array();
                                 $RES = $DB->query($SQL);
@@ -520,6 +539,7 @@
                                         $allf = "Yes";
                                     }
                                     echo '<td>'.$allf.'</td> ';
+                                    echo '<td>'.$user['job'].'</td>';
                                     
                                     echo '<td><a href="edituser.php?id='.$user['id'].'" class="btn btn-warning">Edit</a></td>';
                                     echo '</tr> ';

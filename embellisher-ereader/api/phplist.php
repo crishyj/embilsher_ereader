@@ -142,7 +142,7 @@ class phpList {
     if (empty($pathToPhpList)) $pathToPhpList = dirname(__FILE__);
     
     // Include your phpList config.php file here
-    require(PHPLIST."/config/config.php");
+    // require(PHPLIST."/config/config.php");
     #echo "found phplist<br/>";
     $this->tablePrefix = "phplist_";
     $this->userTablePrefix = "phplist_user_";

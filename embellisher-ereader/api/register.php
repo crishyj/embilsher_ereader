@@ -5,8 +5,8 @@ header('Access-Control-Max-Age: 1000');
 
 require('config.php');
 
-if (PHPLIST != "")
-	require('phplist.php');
+// if (PHPLIST != "")
+// 	require('phplist.php');
 
 $result = array();
 
@@ -35,17 +35,14 @@ if (isset($_POST["storeid"]) && SEPARATE_ADMINS){
 }
 $password = $_POST["password"] ;
 $username = $DB->real_escape_string( $_POST["username"] );
-$name = $DB->real_escape_string( $_POST["name"] );
-
-
-
+$name = $DB->real_escape_string($_POST["name"] );
 
 $SQL = "SELECT * FROM user WHERE email='$username'";
 $RES = $DB->query($SQL);
 if ($user = $RES->fetch_assoc()){
 	$result['msg'] = "User already exists.";
 }else{
-	$pass = $DB->real_escape_string(crypt($password));
+	$pass = $DB->real_escape_string(md5($password));
 	$SQL = "INSERT INTO user (name,type,email,password,storeid) VALUES ('$name','$type', '$username','$pass','$storeid')";
 	$RES = $DB->query($SQL);
 	$userid = $DB->insert_id;
@@ -59,11 +56,7 @@ if ($user = $RES->fetch_assoc()){
 		$RES = $DB->query($SQL);
 	}
 	
-	
-	
-	
 	$result['msg']="success";
-	//we signed up succesfully, lets give a welcome message
 
 	$GET_WELCOME_EMAIL = "SELECT * FROM emailtemplates WHERE id=2";
 	if ($R = $DB->query($GET_WELCOME_EMAIL)){
@@ -79,14 +72,15 @@ if ($user = $RES->fetch_assoc()){
 		}
 	}
 
-	//subscribe user to phplist
-	if (PHPLIST != ""){
-		$list = new phpList('/lists/');
-		$userId = $list->createUser($username,array('name'=>$name));
-		$list->subscribe($userId,2);
-		$list->subscribe($userId,3);
-	}
-	//$result['SQL']=$SQL;
+// 	//subscribe user to phplist
+// 	if (PHPLIST != ""){
+// 		$list = new phpList('/lists/');
+// 		$userId = $list->createUser($username,array('name'=>$name));
+// 		$list->subscribe($userId,2);
+// 		$list->subscribe($userId,3);
+// 	}
+// 	//$result['SQL']=$SQL;
 }
 
 echo json_encode($result);
+?>

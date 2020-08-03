@@ -725,10 +725,10 @@
         </section>
       </section>
 
-      <section id="features.modules.included.sendmailsmtp">
+      <section id="features.modules.included.sendmail.phpsmtp">
         <title>Send mail through SMTP</title>
         <section
-          id="features.modules.included.sendmailsmtp.intro ">
+          id="features.modules.included.sendmail.phpsmtp.intro ">
           <title>What is Send mail through SMTP?</title>
           <para>
             This module allows to send the mail-messages
@@ -741,7 +741,7 @@
           </para>
         </section>
         <section
-          id="features.modules.included.sendmailsmtp.howto">
+          id="features.modules.included.sendmail.phpsmtp.howto">
           <title>How do I use Send mail through SMTP?</title>
           <para>
             Once you have enabled the module, you need to

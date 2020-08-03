@@ -282,6 +282,10 @@ catch (e)
                return false;
         })
     }
+    
+    var audioPause = function(){
+        $('#audioClip').trigger("pause");
+    }
 
     var eestShowHideToggle = function(){
         $(document.body).removeClass('hide-ui');
@@ -369,7 +373,7 @@ catch (e)
             var nowPlayingTitle = $firstTrack.find("h4").html();
 
             $eeSoundtrackBody.append($playlist[0].outerHTML);
-            $eeSoundtrackBody.prepend('<audio controls><source src="'+$firstTrack.attr("src")+'" type="audio/mp3">Your browser does not support the audio element.</audio>');
+            $eeSoundtrackBody.prepend('<audio controls id = "audioClip"><source src="'+$firstTrack.attr("src")+'" type="audio/mp3">Your browser does not support the audio element.</audio>');
             $eeSoundtrackBody.prepend('<div id="now-playing"><h2>Now playing:<br />'+nowPlayingTitle+'</h2><button tabindex="1" type="button" class="btn icon-loop"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></button><button tabindex="1" type="button" class="btn icon-playthru"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button></div>');
 
             var audioElement = $eeSoundtrackBody.find("audio")[0];
@@ -446,6 +450,7 @@ catch (e)
 
             $eeSoundtrackBody.prepend('<button tabindex="50" type="button" class="close" data-dismiss="modal" aria-label="'+Strings.i18n_close+' '+Strings.toc+'" title="'+Strings.i18n_close+' '+Strings.toc+'"><span aria-hidden="true">&times;</span></button>');
             $eeSoundtrackBody.find("button.close").on('click', eestShowHideToggle);
+             $eeSoundtrackBody.find("button.close").on('click', audioPause);
             $("#eestButt").show();
         }
         else {
@@ -457,6 +462,10 @@ catch (e)
             $("#eestButt").hide();
 
         }
+    }
+    
+    var videoPause = function(){
+        $('#videoClip').get(0).pause();
     }
 
 
@@ -554,7 +563,7 @@ catch (e)
             var nowPlayingTitle1 = $firstTrack.find("h4").html();
 
             $eeVideotrackBody.append($playlist[0].outerHTML);
-            $eeVideotrackBody.prepend('<video controls><source src="'+$firstTrack.attr("src")+'" type="video/mp4">Your browser does not support the video element.</video>');
+            $eeVideotrackBody.prepend('<video controls id = "videoClip"><source src="'+$firstTrack.attr("src")+'" type="video/mp4">Your browser does not support the video element.</video>');
             $eeVideotrackBody.prepend('<div id="now-playing"><h2>Now playing:<br />'+nowPlayingTitle1+'</h2><button tabindex="1" type="button" class="btn icon-loop"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></button><button tabindex="1" type="button" class="btn icon-playthru"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button></div>');
 
             var videoElement = $eeVideotrackBody.find("video")[0];
@@ -629,8 +638,9 @@ catch (e)
                 }
             }, false);
 
-            $eeVideotrackBody.prepend('<button tabindex="50" type="button" class="close" data-dismiss="modal" aria-label="'+Strings.i18n_close+' '+Strings.toc+'" title="'+Strings.i18n_close+' '+Strings.toc+'"><span aria-hidden="true">&times;</span></button>');
-            $eeVideotrackBody.find("button.close").on('click', eestShowHideToggle);
+            $eeVideotrackBody.prepend('<button tabindex="50" type="button" class="close" id = "videoClose" data-dismiss="modal" aria-label="'+Strings.i18n_close+' '+Strings.toc+'" title="'+Strings.i18n_close+' '+Strings.toc+'"><span aria-hidden="true">&times;</span></button>');
+            $eeVideotrackBody.find("button.close").on('click', videoShowHideToggle);
+            $eeVideotrackBody.find("button.close").on('click', videoPause);
             $("#videoButt").show();
         }
         else {
@@ -640,6 +650,195 @@ catch (e)
             setTimeout(function(){ $('#videoButt')[0].focus(); }, 100);
 
             $("#videoButt").hide();
+
+        }
+    }
+
+
+    var vimeoShowHideToggle = function(){
+        
+        $(document.body).removeClass('hide-ui');
+        
+        var $appContainer = $('#app-container'),
+            hide = $appContainer.hasClass('vimeo-visible');
+        var bookmark;
+        if (readium.reader.handleViewportResize && !embedded){
+            bookmark = JSON.parse(readium.reader.bookmarkCurrentPage());
+        }
+
+        if (hide){
+            $('#app-container').removeClass('video-visible');
+            $('#app-container').removeClass('vimeo-visible');
+            $('#app-container').removeClass('eest-visible');
+
+            setTimeout(function(){ $('#youtubeButt')[0].focus(); }, 100);
+        }
+        else{
+            $appContainer.addClass('vimeo-visible');
+
+            if($appContainer.hasClass('toc-visible')) {
+                $appContainer.removeClass('toc-visible');
+            }
+
+            setTimeout(function(){ $('#ee-vimeotrack-body button.close')[0].focus(); }, 100);
+        }
+
+        if(embedded){
+            hideLoop(null, true);
+        }else if (readium.reader.handleViewportResize){
+
+            readium.reader.handleViewportResize();
+            
+            setTimeout(function()
+            {
+                readium.reader.openSpineItemElementCfi(bookmark.idref, bookmark.contentCFI, readium.reader);
+            }, 90);
+        }
+    };
+
+    var loadEEVimeotrack = function($iframe, spineItem) {
+        bookmark = JSON.parse(readium.reader.bookmarkCurrentPage());
+        Settings.get(url+bookmark.idref, function(annotations){
+            currentAnnotations = [];
+            if (annotations!=null){
+                for (var i=0; i<annotations.length;i++){
+                    readium.reader.addHighlight(bookmark.idref, annotations[i], i, "highlight")
+                    currentAnnotations[i] = annotations[i];
+                }
+                Settings.put(url+bookmark.idref ,currentAnnotations);
+            }
+            
+        });
+
+        var $eeVimeotrackSource = ($iframe.contents().find("head").find('[name="ee-vimeotrack"]'));
+        var $eeVimeotrackBody = $("#ee-vimeotrack-body");
+        var $playlist=$("<ul class='ee-playlist'></ul>");
+        var looping=false;
+        var playthru=false;
+        var $nextTrack;
+
+        if (!$eeVimeotrackSource || $eeVimeotrackSource.length == 0){
+            $eeVimeotrackSource = ($iframe.contents().find("body").find('[id="ee-vimeotrack"]'));
+        }
+
+        if($eeVimeotrackSource.length > 0) {
+            $eeVimeotrackBody.empty();
+            var spineURI = new URI(url+"/OPS/"+spineItem.href);
+            var trackURI, absURI, nowPlayingTitle1;
+            $eeVimeotrackSource.children().each( function() {
+
+                trackURI = new URI($(this).attr("src"));
+                // absURI = trackURI.absoluteTo(spineURI);
+
+                // var pos = absURI.toString().indexOf("..");
+                // var location = absURI.toString().substring(0, pos)+url+'OPS/'+absURI.toString().substring(pos+3, );
+
+                if($(this).attr("recommended")=="yes") {
+                    $playlist.prepend('<h3 class="recommended-listening">Recommended listening:</h3><li src="'+trackURI+'" class="recommended-listening"><h4>'+$(this).text()+'</h4></li>');
+                }
+                else
+                    $playlist.append('<li src="'+trackURI+'"><h4>'+$(this).text()+'</h4></li>');
+            });
+
+            var $firstTrack = $playlist.find("li.recommended-listening");
+
+            if($firstTrack.length == 0)
+                $firstTrack = $playlist.find("li:first-of-type");
+
+            $firstTrack.addClass("active");
+
+            var nowPlayingTitle1 = $firstTrack.find("h4").html();
+
+            $eeVimeotrackBody.append($playlist[0].outerHTML);
+            $eeVimeotrackBody.prepend('<iframe src="'+$firstTrack.attr("src")+'" id ="vimeoClip"></iframe>');
+            $eeVimeotrackBody.prepend('<div id="now-playing"><h2>Now playing:<br />'+nowPlayingTitle1+'</h2><button tabindex="1" type="button" class="btn icon-loop"><span class="glyphicon glyphicon-retweet" aria-hidden="true"></span></button><button tabindex="1" type="button" class="btn icon-playthru"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"></span></button></div>');
+
+            var vimeoElement = $eeVimeotrackBody.find("iframe")[0];
+            
+            $eeVimeotrackBody.find("li").on('click', function() {
+                // vimeoElement.pause();
+                console.log($(this).attr("src"));
+                $eeVimeotrackBody.find("li.active").removeClass("active");
+                $eeVimeotrackBody.find("iframe").attr('src', $(this).attr("src"));
+                // vimeoElement.load();
+                // vimeoElement.play();
+                nowPlayingTitle1 = $(this).find("h4").html();
+                $(this).addClass("active");
+                $("#now-playing h2").html("Now playing:<br />"+nowPlayingTitle1);
+            });
+
+            $eeVimeotrackBody.find(".icon-loop").on('click', function(){
+                looping = !looping;
+                if(looping)
+                    playthru = false;
+                if(looping)
+                    $(this).addClass("active");
+                else
+                    $(this).removeClass("active");
+
+                if(playthru)
+                    $(".icon-playthru").addClass("active");
+                else
+                    $(".icon-playthru").removeClass("active");
+            });
+
+            // playthru playback
+            $eeVimeotrackBody.find(".icon-playthru").on('click', function(){
+                playthru = !playthru;
+
+                if(playthru)
+                    looping = false;
+
+                if(playthru)
+                    $(this).addClass("active");
+                else
+                    $(this).removeClass("active");
+
+                if(looping)
+                    $(".icon-loop").addClass("active");
+                else
+                    $(".icon-loop").removeClass("active");
+            });
+
+            vimeoElement.addEventListener('ended', function() {
+                if(looping) {
+                    this.currentTime = 0;
+                    this.play();
+                }
+                if(playthru) {
+                    this.pause();
+
+                    $nextTrack = $eeVimeotrackBody.find("li:contains('"+nowPlayingTitle1+"')").next("li");
+
+                    if($nextTrack.length==0) 
+                        $nextTrack = $eeVimeotrackBody.find("li:first");
+
+                    $eeVimeotrackBody.find("iframe").attr("src", $nextTrack.attr("src"));
+                    $eeVimeotrackBody.find("li.active").removeClass("active");
+
+                    nowPlayingTitle1 = $nextTrack.find("h4").html();
+                    $nextTrack.addClass("active");
+
+                    $("#now-playing h2").html("Now playing:<br />"+nowPlayingTitle1);
+
+                    this.load();
+                    this.play();
+                }
+            }, false);
+
+            $eeVimeotrackBody.prepend('<button tabindex="50" type="button" class="close" id = "vimeoClose" data-dismiss="modal" aria-label="'+Strings.i18n_close+' '+Strings.toc+'" title="'+Strings.i18n_close+' '+Strings.toc+'"><span aria-hidden="true">&times;</span></button>');
+            $eeVimeotrackBody.find("button.close").on('click', vimeoShowHideToggle);
+            // $eeVimeotrackBody.find("button.close").on('click', vimeoPause);
+            $("#youtubeButt").show();
+        }
+        else {
+            $('#app-container').removeClass('video-visible');
+            $('#app-container').removeClass('vimeo-visible');
+            $('#app-container').removeClass('eest-visible');
+
+            setTimeout(function(){ $('#youtubeButt')[0].focus(); }, 100);
+
+            $("#youtubeButt").hide();
 
         }
     }
@@ -848,6 +1047,8 @@ catch (e)
         $('.icon-eest').on('click', eestShowHideToggle);
 
         $('.icon-videoest').on('click', videoShowHideToggle);
+
+        $('.icon-vimeoest').on('click', vimeoShowHideToggle);
 
         var setTocSize = function(){
             // var appHeight = $(document.body).height() - $('#app-container')[0].offsetTop;
@@ -1116,6 +1317,8 @@ catch (e)
 
 
             readium.reader.on(ReadiumSDK.Events.CONTENT_DOCUMENT_LOADED, loadEEVideotrack);
+
+            readium.reader.on(ReadiumSDK.Events.CONTENT_DOCUMENT_LOADED, loadEEVimeotrack);
 
 
             //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);

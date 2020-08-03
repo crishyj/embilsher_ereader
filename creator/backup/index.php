@@ -31,7 +31,7 @@ if (!empty($_POST['login'])) {
         if ($count != '1') {
             return false;
         } else {
-            $password = crypt($password, $salt);
+            $password = md5($password);
             if ($password2 != $password) {
                 return false;
             } else {

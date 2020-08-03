@@ -32,7 +32,7 @@ if (isset($_POST['signup'])) {
     if ($user = $RES->fetch_assoc()) {
         $err = 'User already exists.';
     } else {
-        $pass = $DB->real_escape_string(crypt($password));
+        $pass = $DB->real_escape_string(md5($password));
         $SQL = "INSERT INTO user (name,type,email,password) VALUES ('$name','$type', '$username','$pass')";
         $RES = $DB->query($SQL);
         $userid = $DB->insert_id;

@@ -21,7 +21,7 @@
             if (!$test = $rcheck->fetch_assoc()) {
                 $err = 'You cannot create a code for this book.';
             } else {
-                $pass = $DB->real_escape_string(crypt($password, $salt));
+                $pass = $DB->real_escape_string(md5($password));
                 $SQL = "INSERT INTO promocodes (code,free,maxuses,discount,bookid) VALUES ('$code','$free', '$maxuses','$discount','$bookid')";
                 $RES = $DB->query($SQL);
                 $success = 'Coupon added successfully!';

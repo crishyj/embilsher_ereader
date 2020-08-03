@@ -10,9 +10,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['type']) && $_SESSION['type']
 
 if (!empty($_POST['login'])) {
     $username = $DB->real_escape_string($_POST['username']);
-    $result = $DB->query("SELECT id,email,password,admin,name,status FROM user WHERE email = '".$username."'");
+    // $result = $DB->query("SELECT id,email,password,admin,name,status FROM user WHERE email = '".$username."'");
+    $result = $DB->query("SELECT * FROM user WHERE email = '".$username."'");
     $count = $result->num_rows;
     $rij = $result->fetch_assoc();
+   
 
     function validate_name($username)
     {
@@ -31,7 +33,7 @@ if (!empty($_POST['login'])) {
             return false;
         } else {
             $passwordori = $password;
-            $password = crypt($password, $password2);
+            $password = md5($password);
             if ($password2 != $password) {
                 return false;
             } else {
@@ -64,7 +66,9 @@ if (!empty($_POST['login'])) {
             $_SESSION['user_name'] = $rij['email'];
             $_SESSION['display_name'] = $rij['name'];
             $_SESSION['type'] = $rij['admin'];
-            $_SESSION['status'] = $rij['status'];
+            $_SESSION['status'] = $rij['status'];            
+            $_SESSION['category'] = $rij['category'];
+            $_SESSION['job'] = $rij['job'];
             echo '
                 <html>
                     <head>

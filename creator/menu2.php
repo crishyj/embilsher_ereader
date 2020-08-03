@@ -1,25 +1,24 @@
 <div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm" style="margin-top:36px; z-index:800">
   <a class="navmenu-brand visible-md visible-lg" href="javascript:void(null);"><?php echo $booktitle; ?></a>
-  <?php 
-  if (isset($B) && $B['coverHref']!=""){
-    echo '<img src="'."$B[coverHref]".'" style="max-width:90%;max-height:300px; margin-left:5%;" alt="book">';
+  <?php
+  if (isset($B) && $B['coverHref'] != '') {
+      echo '<img src="'."$B[coverHref]".'" style="max-width:90%;max-height:300px; margin-left:5%;" alt="book">';
   }
   ?>
   <ul class="nav navmenu-nav">
     <li style="margin-left:10px;"><h3>Chapters</h3></li>
     <?php
-    for($i = 0; $i < count($chapterTitles); ++$i) {
-      echo '<li style="width:100%;"> <a style="position:relative; clear:both; float:left; width:80%;" href="?book='.$B['id'].'&cchapt='.$chapterNrs[$i].'">- '.$chapterTitles[$i].'</a>
+    for ($i = 0; $i < count($chapterTitles); ++$i) {
+        echo '<li style="width:100%;"> <a style="position:relative; clear:both; float:left; width:80%;" href="?book='.$B['id'].'&cchapt='.$chapterNrs[$i].'">- '.$chapterTitles[$i].'</a>
           <div class="onhoverbuttons" style="clear:both; text-align:right;" >';
-      if ($i > 0){
-        echo '<a href="?book='.$bookid.'&chapter_id='.$chapterIds[$i].'&action=up" style="margin-left:3px;" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></a>';
-      }
-      if ($i < count($chapterTitles)-1){
-        echo '<a href="?book='.$bookid.'&chapter_id='.$chapterIds[$i].'&action=down" style="margin-left:3px;" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></a>';
-      }
-            
-            
-      echo '      <form role="form"action="" id="delete_form" method="post" style="float:right;margin-left:3px;" onsubmit="return confirm(\'Are you sure you want to delete this chapter? \nThis action cannot be undone.\');">
+        if ($i > 0) {
+            echo '<a href="?book='.$bookid.'&chapter_id='.$chapterIds[$i].'&action=up" style="margin-left:3px;" class="btn btn-default"><span class="glyphicon glyphicon-chevron-up"></span></a>';
+        }
+        if ($i < count($chapterTitles) - 1) {
+            echo '<a href="?book='.$bookid.'&chapter_id='.$chapterIds[$i].'&action=down" style="margin-left:3px;" class="btn btn-default"><span class="glyphicon glyphicon-chevron-down"></span></a>';
+        }
+
+        echo '      <form role="form"action="" id="delete_form" method="post" style="float:right;margin-left:3px;" onsubmit="return confirm(\'Are you sure you want to delete this chapter? \nThis action cannot be undone.\');">
                     <input type="hidden" name="chapterid" value="'.$chapterIds[$i].'">
                     <input type="hidden" name="bookid" value="'.$bookid.'">
                
@@ -42,9 +41,9 @@
 	
 	<?php
     echo '<li style="margin-left:10px;"><h3>Audio Playlist</h3></li>';
-    if (count($audioTitles) > 0){
-        for($i = 0; $i < count($audioTitles); ++$i) {
-          echo '
+    if (count($audioTitles) > 0) {
+        for ($i = 0; $i < count($audioTitles); ++$i) {
+            echo '
           <li style="width:100%;">
           <a style="position:relative; float:left; width:80%;" href="'.$audioSources[$i].'" target="_blank">
               - '.$audioTitles[$i].'<br/>
@@ -58,7 +57,7 @@
             </form>  
           </li>';
         }
-      }
+    }
     ?>
     
     <div style="margin-left:10px; margin-right:10px;">
@@ -76,15 +75,15 @@
       </form>
     </div>
 
-    
+  
 	<?php
     echo '<li style="margin-left:10px;"><h3>Video Playlist</h3></li>';
-    if (count($vieoTitles) > 0){
-        for($i = 0; $i < count($vieoTitles); ++$i) {
-          echo '
+    if (count($videoTitles) > 0) {
+        for ($i = 0; $i < count($videoTitles); ++$i) {
+            echo '
           <li style="width:100%;">
           <a style="position:relative; float:left; width:80%;" href="'.$videoSources[$i].'" target="_blank">
-              - '.$vieoTitles[$i].'<br/>
+              - '.$videoTitles[$i].'<br/>
           </a>
             <form role="form" style="display:inline-block; float:left;" action="" id="delete_form" method="post" onsubmit="return confirm(\'Are you sure you want to delete this video from the playlist? \nThis action cannot be undone.\');">
               <input type="hidden" name="videoid" value="'.$videoIds[$i].'">
@@ -95,7 +94,7 @@
             </form>  
           </li>';
         }
-      }
+    }
     ?>
     
     <div style="margin-left:10px; margin-right:10px;">
@@ -110,6 +109,44 @@
         </div>
         <br/><br/>
         <button type="submit" name="addVideo" value="new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Video</button>
+      </form>
+    </div>
+
+    <?php
+    echo '<li style="margin-left:10px;"><h3>Youtube Video Playlist</h3></li>';
+    if (count($vimeoTitles) > 0) {
+        for ($i = 0; $i < count($vimeoTitles); ++$i) {
+            echo '
+          <li style="width:100%;">
+          <a style="position:relative; float:left; width:80%;" href="'.$vimeoSources[$i].'" target="_blank">
+              - '.$vimeoTitles[$i].'<br/>
+          </a>
+            <form role="form" style="display:inline-block; float:left;" action="" id="delete_form" method="post" onsubmit="return confirm(\'Are you sure you want to delete this video from the playlist? \nThis action cannot be undone.\');">
+              <input type="hidden" name="vimeoid" value="'.$vimeoIds[$i].'">
+              <input type="hidden" name="bookid" value="'.$bookid.'">          
+              <button  type="submit" name="deleteVimeo" id="deletebtn" value="delete" style="margin-top:5px;" class="btn btn-default">
+                <span class="glyphicon glyphicon-trash"></span>
+              </button>
+            </form>  
+          </li>';
+        }
+    }
+    ?>
+
+    <div style="margin-left:10px; margin-right:10px;">
+      <form action="" method="POST">
+         <input type="hidden" name="bookid" value="<?php echo $bookid; ?>">
+         <div class="form-group">
+             <label for="vimeotitle">Youtube Video Title</label>
+             <input type="text" name="vimeotitle" class="form-control" id="videotitle" required="required">
+          </div>
+          <div class="form-group">
+             <label for="vimeoLink">Youtube Video Link</label>
+             <input type="text" name="vimeoLink" class="form-control" id="vimeoLink" required="required">
+          </div>
+        <div class="form-group">
+            <button type="submit" name="addVimeo" value="new" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add Video</button>
+        </div>
       </form>
     </div>
   </ul>

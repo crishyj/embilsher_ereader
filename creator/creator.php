@@ -13,9 +13,8 @@
             $res = $DB->query($sel);
             if ($B = $res->fetch_assoc()) {
                 $templatelocations = array('ebooks/empty/OPS/assets/', 'ebooks/family/OPS/assets/', 'ebooks/child/OPS/assets/', 'ebooks/castle/OPS/assets/');
-
                 $newbooklocation = $B['rootUrl'].'OPS/assets/';
-                echo $newbooklocation;
+                //echo $newbooklocation;
                 $template = $B['template'];
                 $emptybooklocation = $templatelocations[$template];
                 $goodluck = xcopy($emptybooklocation.'js/', $newbooklocation.'js/');
@@ -29,10 +28,10 @@
         function saveCompleteBook($DB, $bookid, $userid, $APP_LOC)
         {
             updateTemplates($DB, $bookid, $userid);
-
             $sel = "SELECT * FROM private_library WHERE userid='$userid' AND id='$bookid'";
             $res = $DB->query($sel);
             if ($B = $res->fetch_assoc()) {
+
                 $GETSONGS = "SELECT * FROM private_audio WHERE bookid='$bookid'";
                 $songs = $DB->query($GETSONGS);
                 $song_titles = array();
@@ -41,7 +40,7 @@
                     $song_titles[] = $song['name'];
                     $song_files[] = $song['audiofile'];
                 }
-
+                
                 //get videos
                 $GETVIDEOS = "SELECT * FROM private_video WHERE bookid='$bookid'";
                 $videos = $DB->query($GETVIDEOS);
@@ -52,6 +51,16 @@
                     $video_files[] = $video['videofile'];
                 }
 
+                //get vimeos
+                $GETVIMEOS = "SELECT * FROM private_vimeo WHERE bookid='$bookid'";
+                $vimeos = $DB->query($GETVIMEOS);
+                $vimeo_titles = array();
+                $vimeo_links = array();
+                while ($vimeo = $vimeos->fetch_assoc()) {
+                    $vimeo_titles[] = $vimeo['name'];
+                    $vimeo_links[] = $vimeo['vimeoLink'];
+                }
+
                 $logicnumber = 0;
                 $GETchapters = "SELECT * FROM private_chapters WHERE bookid='$bookid' ORDER BY chapter_nr ASC";
                 $chapters = $DB->query($GETchapters);
@@ -60,7 +69,7 @@
                     $chap_id = $chap['id'];
                     $sqlsave = "UPDATE private_chapters SET chapter_nr = '$chap_nr' WHERE id='$chap_id'";
                     $DB->query($sqlsave);
-                    writeChapterToFile($chap['content'], $chap['title'], $chap_nr, '', $B['rootUrl'], $song_titles, $song_files, $video_titles, $video_files, $APP_LOC);
+                    writeChapterToFile($chap['content'], $chap['title'], $chap_nr, '', $B['rootUrl'], $song_titles, $song_files, $video_titles, $video_files, $vimeo_titles, $vimeo_links, $APP_LOC);
                     ++$logicnumber;
                 }
                 generateTOC($DB, $bookid);
@@ -106,14 +115,30 @@
             $videolocation = $DB->real_escape_string($_POST['videolocation']);
             $bookid = $DB->real_escape_string($_POST['bookid']);
 
-            $INS = "INSERT INTO private_video (bookid,name,videofile) VALUE('$bookid','$videotitle','$videolocation');";
-            $DB->query($INS);
+            if (strripos($videolocation, 'youtu.be')) {
+                echo"
+                    <script>
+                        alert('Please check the Video Type');
+                        window.history.back();
+                    </script>";
+                exit();
+            } else {
+                $INS = "INSERT INTO private_video (bookid,name,videofile) VALUE('$bookid','$videotitle','$videolocation');";
+                $DB->query($INS);
+                saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+                $success = 'Added '.$videotitle.' to playlist.';
+                header('Location: ?book='.$bookid.'&cchapt='.$chap_nr.'&success='.$success);
+                exit();
+            }
 
-            saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+            // $INS = "INSERT INTO private_video (bookid,name,videofile) VALUE('$bookid','$videotitle','$videolocation');";
+            // $DB->query($INS);
 
-            $success = 'Added '.$videotitle.' to playlist.';
-            header('Location: ?book='.$bookid.'&cchapt='.$chap_nr.'&success='.$success);
-            exit();
+            // saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+
+            // $success = 'Added '.$videotitle.' to playlist.';
+            // header('Location: ?book='.$bookid.'&cchapt='.$chap_nr.'&success='.$success);
+            // exit();
         }
          //delete video
         if (isset($_POST['videoid']) && isset($_POST['deleteVideo']) && isset($_POST['bookid'])) {
@@ -128,6 +153,54 @@
 
             header('Location: ?book='.$bookid.'&success='.$success);
             //TODO save complete book.
+            exit();
+        }
+
+         //add vimeo to playlist
+         if (isset($_POST['addVimeo']) && isset($_POST['bookid'])) {
+             $userid = $_SESSION['user_id'];
+             $vimeotitle = $DB->real_escape_string($_POST['vimeotitle']);
+             $vimeoLink = $DB->real_escape_string($_POST['vimeoLink']);
+             $bookid = $DB->real_escape_string($_POST['bookid']);
+
+             if (strripos($vimeoLink, 'youtu.be')) {
+                 $youtubePos = strripos($vimeoLink, 'youtu.be') + 9;
+                 $youtube0 = substr($vimeoLink, $youtubePos);
+                 $youtube = 'https://www.youtube.com/embed/'.rtrim($youtube0);
+                 $INS = "INSERT INTO private_vimeo (bookid,name,vimeoLink) VALUE('$bookid','$vimeotitle','$youtube');";
+                 $DB->query($INS);
+                 saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+                 $success = 'Added '.$videotitle.' to playlist.';
+                 header('Location: ?book='.$bookid.'&cchapt='.$chap_nr.'&success='.$success);
+                 exit();
+             } else {
+                 echo"
+                    <script>
+                        alert('Please check the Video Type');
+                        window.history.back();
+                    </script>";
+                 exit();
+             }
+
+             // $INS = "INSERT INTO private_video (bookid,name,videofile) VALUE('$bookid','$videotitle','$videolocation');";
+            // $DB->query($INS);
+
+            // saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+
+            // $success = 'Added '.$videotitle.' to playlist.';
+            // header('Location: ?book='.$bookid.'&cchapt='.$chap_nr.'&success='.$success);
+            // exit();
+         }
+         //delete video
+        if (isset($_POST['vimeoid']) && isset($_POST['deleteVimeo']) && isset($_POST['bookid'])) {
+            $vimeoid = $DB->real_escape_string($_POST['vimeoid']);
+            $DEL = "DELETE FROM private_vimeo WHERE id='$vimeoid';";
+            $DB->query($DEL);
+            $success = 'Deleted '.$vimeotitle.' from playlist.';
+            $bookid = $DB->real_escape_string($_POST['bookid']);
+            $userid = $_SESSION['user_id'];
+            saveCompleteBook($DB, $bookid, $userid, $APP_LOC);
+            header('Location: ?book='.$bookid.'&success='.$success);
             exit();
         }
 
@@ -175,16 +248,17 @@
 
         //new chapter
         if (isset($_GET['book']) && isset($_GET['action']) && $_GET['action'] == 'newchapter') {
-            $userid = $_SESSION['user_id'];
-            $chaptertitle = 'New Chapter';
+           
             $bookid = $DB->real_escape_string($_GET['book']);
-            $bookcontent = '';
-            updateTemplates($DB, $bookid, $userid);
-
-            //select book from database
-            $sel = "SELECT * FROM private_library WHERE userid='$userid' AND id='$bookid'";
+           
+            $sel = "SELECT * FROM private_library WHERE id='$bookid'";
             $res = $DB->query($sel);
             if ($B = $res->fetch_assoc()) {
+                $userid = $B['userid'];
+                $chaptertitle = 'New Chapter';
+                $bookcontent = '';
+                updateTemplates($DB, $bookid, $userid);
+                
                 //get chapter nr.
                 $GETCHAPTERNR = "SELECT * FROM private_chapters WHERE bookid='$bookid' ORDER BY chapter_nr DESC";
                 $chapres = $DB->query($GETCHAPTERNR);
@@ -193,15 +267,21 @@
                 } else {
                     $chap_nr = 0;
                 }
-
+                
                 $chaptertitle = $chap_nr.'-'.$chaptertitle;
+              
                 $newcontent = '<div id="container-normal"><h1>(Title here)</h1><br/><p>(Paragraph content here)</p></div>';
                 if ($B['template'] == 1) {
                     $newcontent = '<p style="text-align: center;"><img style="display: block; margin-left: auto; margin-right: auto;" src="../assets/images/header.png" alt="" width="985" height="65" />-(page)-</p><div id="container-normal"><h1>(Title here)</h1><br/><p>(Paragraph content here)</p></div>';
                 }
+                
                 writeChapterToFile('', $chaptertitle, $chap_nr, $newcontent, $B['rootUrl']);
+                
                 $newcontent = $DB->real_escape_string($newcontent);
-                $INS = "INSERT INTO private_chapters (bookid,title,content, chapter_nr) VALUE('$bookid','$chaptertitle','$newcontent','$chap_nr');";
+                
+                $INS = "INSERT INTO private_chapters (bookid,title,content, chapter_nr) VALUE('$bookid','$chaptertitle','$newcontent','$chap_nr')";
+                // var_dump($INS);
+                // die();
                 $DB->query($INS);
                 generateTOC($DB, $bookid);
                 $success = 'Chapter added.';
@@ -263,7 +343,17 @@
                     $video_files[] = $video['videofile'];
                 }
 
-                writeChapterToFile($bookcontent, $chaptertitle, $chap_nr, '', $B['rootUrl'], $song_titles, $song_files, $video_titles, $video_files, $APP_LOC);
+                //get vimeos
+                $GETVIMEOS = "SELECT * FROM private_vimeo WHERE bookid='$bookid'";
+                $vimeos = $DB->query($GETVIMEOS);
+                $vimeo_titles = array();
+                $vimeo_links = array();
+                while ($vimeo = $vimeos->fetch_assoc()) {
+                    $vimeo_titles[] = $vimeo['name'];
+                    $vimeo_links[] = $vimeo['vimeoLink'];
+                }
+
+                writeChapterToFile($bookcontent, $chaptertitle, $chap_nr, '', $B['rootUrl'], $song_titles, $song_files, $video_titles, $video_files, $vimeo_titles, $vimeo_links, $APP_LOC);
                 $bookcontent = $DB->real_escape_string($bookcontent);
                 $INS = "UPDATE private_chapters SET title='$chaptertitle', content='$bookcontent' WHERE id='$chapterid';";
                 $DB->query($INS);
@@ -330,7 +420,7 @@
             }
         }
 
-        $vieoTitles = array();
+        $videoTitles = array();
         $videoIds = array();
         $videoSources = array();
         if (isset($book)) {
@@ -338,9 +428,23 @@
             $SEL = "SELECT * FROM private_video WHERE bookid='$bookid'";
             $ch = $DB->query($SEL);
             while ($A = $ch->fetch_assoc()) {
-                $vieoTitles[] = $A['name'];
+                $videoTitles[] = $A['name'];
                 $videoIds[] = $A['id'];
                 $videoSources[] = $A['videofile'];
+            }
+        }
+
+        $vimeoTitles = array();
+        $vimeoIds = array();
+        $vimeoSources = array();
+        if (isset($book)) {
+            //get songs
+            $SEL = "SELECT * FROM private_vimeo WHERE bookid='$bookid'";
+            $ch = $DB->query($SEL);
+            while ($A = $ch->fetch_assoc()) {
+                $vimeoTitles[] = $A['name'];
+                $vimeoIds[] = $A['id'];
+                $vimeoSources[] = $A['vimeoLink'];
             }
         }
 

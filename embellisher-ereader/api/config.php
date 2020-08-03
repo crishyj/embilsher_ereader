@@ -8,7 +8,7 @@ define('CREATORRELURL', 'http://james.com/creator/');
 
 //if we have phplist enable it by setting the path
 //define("PHPLIST", '../../lists');
-define('PHPLIST', 'http://james.com/lists/admin/');
+define('PHPLIST', 'http://james.com/embellisher-ereader/admin');
 
 //if true then each admin account has its own store.
 //Users that register have to choose the store to which they register

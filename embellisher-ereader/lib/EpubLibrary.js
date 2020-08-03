@@ -725,7 +725,7 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 		
 		//Test user data (made by Tom Groentjes):
 		
-		console.log(backenddata);
+// 		console.log(backenddata);
 
 		$appContainer.append(UserDialog({strings: Strings, user: backenddata.userInfo}));
       
@@ -809,6 +809,7 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 			var useremail = $("#register-email").val();
 			var userpassword = $("#register-password").val();
 			var usertype = $("#registertype").val();
+			
 			if (!$("#registereula").is(':checked')){
 				$("#register_error_message").text("Please accept the end user license.");
 				$("#buttRegisterProfile").text("Register");
@@ -821,11 +822,11 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 			$.post(backenddata.mainurl+backenddata.registerurl, {username:useremail,password:userpassword,name:username,type:usertype}, function(data, textStatus) {
 			  //data contains the JSON object
 			  //textStatus contains the status: success, error, etc
-			  console.log(textStatus);
-			  if (textStatus == "success"){
-			  
+			  alert(textStatus);
+			//   if (textStatus == "success"){
+			
 				if (data.msg == "success"){
-					
+					console.log('ok');
 					$("#tab-user-register").hide();
 					$("#tab-user-login").show();
 					$("#footer-userprofile-login").show();
@@ -836,11 +837,11 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 				}
 				$("#buttRegisterProfile").text("Register");
 				$("#buttRegisterProfile").prop('disabled', false);
-			  }else{
-				$("#register_error_message").text("Something went wrong, try again.");
-				$("#buttRegisterProfile").val("Register");
-				$("#buttRegisterProfile").prop('disabled', false);
-			  }
+			//   }else{
+			// 	$("#register_error_message").text("Something went wrong, try again.");
+			// 	$("#buttRegisterProfile").val("Register");
+			// 	$("#buttRegisterProfile").prop('disabled', false);
+			//   }
 			}, "json");
 		});
 		$('#buttLoginProfile').on('click',function(e){
@@ -851,6 +852,7 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 			$("#buttLoginProfile").prop('disabled', true);
 			console.log("CALLING LOGIN");
 			$.post(backenddata.mainurl+backenddata.loginurl, {email:useremail,password:userpassword}, function(data, textStatus) {
+				
 			  //data contains the JSON object
 			  //textStatus contains the status: success, error, etc
 			  console.log(textStatus);
@@ -984,7 +986,8 @@ define(['jquery', 'bootstrap', 'storage/StorageManager', 'storage/Settings', 'Ep
 		$(window).on('resize', setItemHeight);
 
 		var setAppSize = function(){
-            var appHeight = $(document.body).height() - $('#app-container')[0].offsetTop;
+			// var appHeight = $(document.body).height() - $('#app-container')[0].offsetTop;
+			var appHeight = $(document.body).height();
             $('#app-container').height(appHeight);
         }
         $(window).on('resize', setAppSize);

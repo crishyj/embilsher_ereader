@@ -29,7 +29,7 @@ if (isset($book)){
 	$the_folder = rtrim($book['rootUrl'],'/');
 	generateTOC($DB,$bookid);
 	$zip_file_name = $book['id'].'.epub';
-	$zip_file_name = 'ebooks/'.str_replace(" ","_",$zip_file_name);
+	$zip_file_name = $SERVERURL.'ebooks/'.str_replace(" ","_",$zip_file_name);
 	$download_file= true;
 	
 	function createZipFromDir($dir, $zip_file) {

@@ -26796,29 +26796,30 @@ define('epub-model/package_document_parser',['require', 'module', 'jquery', 'und
             //if layout not set
             if(!metadata.layout)
             {
-                var pathToIBooksSpecificXml = new URI("/META-INF/com.apple.ibooks.display-options.xml");
+                dff.resolve();
+                // var pathToIBooksSpecificXml = new URI("META-INF/com.apple.ibooks.display-options.xml");
 
-                publicationFetcher.relativeToPackageFetchFileContents(pathToIBooksSpecificXml, 'text', function (ibookPropText) {
-                    if(ibookPropText) {
-                        var parser = new MarkupParser();
-                        var propModel = parser.parseXml(ibookPropText);
-                        var fixLayoutProp = $("option[name=fixed-layout]", propModel)[0];
-                        if(fixLayoutProp) {
-                            var fixLayoutVal = $(fixLayoutProp).text();
-                            if(fixLayoutVal === "true") {
-                                metadata.layout = "pre-paginated";
-                                console.log("using com.apple.ibooks.display-options.xml fixed-layout property");
-                            }
-                        }
-                    }
+                // publicationFetcher.relativeToPackageFetchFileContents(pathToIBooksSpecificXml, 'text', function (ibookPropText) {
+                //     if(ibookPropText) {
+                //         var parser = new MarkupParser();
+                //         var propModel = parser.parseXml(ibookPropText);
+                //         var fixLayoutProp = $("option[name=fixed-layout]", propModel)[0];
+                //         if(fixLayoutProp) {
+                //             var fixLayoutVal = $(fixLayoutProp).text();
+                //             if(fixLayoutVal === "true") {
+                //                 metadata.layout = "pre-paginated";
+                //                 console.log("using com.apple.ibooks.display-options.xml fixed-layout property");
+                //             }
+                //         }
+                //     }
 
-                    dff.resolve();
+                //     dff.resolve();
 
-                }, function (err) {
+                // }, function (err) {
 
-                    console.log("com.apple.ibooks.display-options.xml not found");
-                    dff.resolve();
-                });
+                //     console.log("com.apple.ibooks.display-options.xml not found");
+                //     dff.resolve();
+                // });
             }
             else {
                 dff.resolve();

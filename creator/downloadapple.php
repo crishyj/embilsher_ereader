@@ -13,10 +13,12 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['type']))
     die();
 }
 
+
 if (isset($_GET['book'])){
    $bookid = $DB->real_escape_string($_GET['book']);
 }
 if (isset($bookid)){
+	
 	$SEL = "SELECT * FROM private_library WHERE id='$bookid'";
 	$rb = $DB->query($SEL);
 	if ($B = $rb->fetch_assoc()){
@@ -26,16 +28,28 @@ if (isset($bookid)){
 }
 if (isset($book)){
 	$the_folder = rtrim($book['rootUrl'],'/');
+
 	generateTOC_apple($DB,$bookid);
+	
+
 	$zip_file_name = $book['id'].'.epub';
 	$zip_file_name = 'ebooks/'.str_replace(" ","_",$zip_file_name);
+
+
 	$download_file= true;
+	//$delete_file_after_download= true; doesnt work!!
+	
 	function createZipFromDir($dir, $zip_file) {
 		file_put_contents($zip_file, base64_decode("UEsDBAoAAAAAAOmRAT1vYassFAAAABQAAAAIAAAAbWltZXR5cGVhcHBsaWNhdGlvbi9lcHViK3ppcFBLAQIUAAoAAAAAAOmRAT1vYassFAAAABQAAAAIAAAAAAAAAAAAIAAAAAAAAABtaW1ldHlwZVBLBQYAAAAAAQABADYAAAA6AAAAAAA="));
+
 		$zip = new ZipArchive;
+
+		// open archive
 		if (($err = $zip->open($zip_file)) !== TRUE) {
 		    return false;
 		}
+
+		
 		zipDir($dir, $zip);
 		return $zip;
 	}
@@ -66,12 +80,15 @@ if (isset($book)){
 		closedir($handle);
 	}
 
+
 	class FlxZipArchive extends ZipArchive {
+		/** Add a Dir with Files and Subdirs to the archive;;;;; @param string $location Real Location;;;;  @param string $name Name in Archive;;; @author Nicolas Heimann;;;; @access private  **/
+
 		public function addDir($location, $name) {
 			$this->addEmptyDir($name);
 
 			$this->addDirDo($location, $name);
-		 }
+		 } // EO addDir;
 
 		/**  Add Files & Dirs to archive;;;; @param string $location Real Location;  @param string $name Name in Archive;;;;;; @author Nicolas Heimann
 		 * @access private   **/

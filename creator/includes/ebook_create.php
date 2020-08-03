@@ -485,7 +485,7 @@ function entities_to_unicode($str)
 }
 
 //writes the content and audio playlist of a chapter to a file.
-function writeChapterToFile($chapter_content, $chapter_title, $chapter_nr, $chapter_extraHeaders, $booklocation, $song_titles = array(), $song_files = array(), $video_titles = array(), $video_files = array(), $APP_LOC = '/creator')
+function writeChapterToFile($chapter_content, $chapter_title, $chapter_nr, $chapter_extraHeaders, $booklocation, $song_titles = array(), $song_files = array(), $video_titles = array(), $video_files = array(), $vimeo_titles = array(), $vimeo_links = array(), $APP_LOC = '/creator')
 {
     $html = '<!DOCTYPE html>
 <html>
@@ -524,6 +524,14 @@ function writeChapterToFile($chapter_content, $chapter_title, $chapter_nr, $chap
             $videofile = str_replace(ROOT_URL, '', $videofile);
             // $html .= '<div name="videotrack-'.$i.'" src="'.$videofile.'" recommended="no">'.$video_titles[$i].'</div>';
             $html .= '<div name="videotrack-'.$i.'" src="'.$video_files[$i].'" recommended="no">'.$video_titles[$i].'</div>';
+        }
+        $html .= '</div>';
+    }
+
+    if (count($vimeo_titles) > 0) {
+        $html .= '<div id="ee-vimeotrack" style="display:none">';
+        for ($i = 0; $i < count($vimeo_titles); ++$i) {
+            $html .= '<div name="vimeotrack-'.$i.'" src="'.$vimeo_links[$i].'" recommended="no">'.$vimeo_titles[$i].'</div>';
         }
         $html .= '</div>';
     }

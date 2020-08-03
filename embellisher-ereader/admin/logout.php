@@ -11,6 +11,7 @@
             setcookie($name, '', time() - 1000, '/');
         }
     }
+    session_unset();
     session_destroy();
         echo '
         <html>
